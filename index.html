@@ -1,671 +1,3945 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدرسة ماري | رحلة المعرفة والتميز</title>
-    <!-- Tailwind CSS CDN -->
+
+    <title>مدرسة ماري | Mary School - الحجيرة، توقرت</title>
+
+    <meta name="description"
+          content="مدرسة وروضة ماري بالحجيرة - توقرت. روضة وحضانة عدنان ولينا، دروس الدعم، الدورات التكوينية، والتحضير للامتحانات.">
+
+    <meta name="theme-color" content="#1b4332">
+
+    <meta property="og:title" content="مدرسة ماري | Mary School">
+    <meta property="og:description"
+          content="بيئة تعليمية متكاملة لجميع المستويات مع روضة وحضانة ودروس دعم ودورات تكوينية.">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Tajawal -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <script>
         tailwind.config = {
+            darkMode: 'class',
+
             theme: {
                 extend: {
                     colors: {
                         brandGreen: '#1b4332',
                         brandLightGreen: '#2d6a4f',
                         brandGold: '#d4af37',
-                        brandBg: '#f8f9fa'
+                        brandCream: '#f8f5ea'
                     },
+
                     fontFamily: {
                         tajawal: ['Tajawal', 'sans-serif']
+                    },
+
+                    boxShadow: {
+                        soft: '0 10px 35px rgba(0,0,0,.08)',
+                        glow: '0 0 35px rgba(212,175,55,.18)'
                     }
                 }
             }
         }
     </script>
+
     <style>
-        body { font-family: 'Tajawal', sans-serif; }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+
+        ::-webkit-scrollbar {
+            width: 9px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2d6a4f;
+            border-radius: 20px;
+        }
+
+        /* Selection */
+
+        ::selection {
+            background: #d4af37;
+            color: #111827;
+        }
+
+        /* Background decoration */
+
+        .hero-pattern {
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(212,175,55,.12) 0 2px, transparent 3px),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,.07) 0 2px, transparent 3px);
+            background-size: 35px 35px;
+        }
+
+        .glass {
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .dark .glass {
+            background: rgba(255,255,255,.06);
+        }
+
+        /* Reveal animation */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition:
+                opacity .7s ease,
+                transform .7s ease;
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modal */
+
+        .modal {
+            opacity: 0;
+            visibility: hidden;
+            transition: .25s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-panel {
+            transform: translateY(25px) scale(.97);
+            transition: .25s ease;
+        }
+
+        .modal.active .modal-panel {
+            transform: translateY(0) scale(1);
+        }
+
+        /* Toast */
+
+        .toast {
+            transform: translateY(120px);
+            opacity: 0;
+            transition: .35s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Floating WhatsApp */
+
+        .whatsapp-float {
+            animation: pulseWhatsapp 2.2s infinite;
+        }
+
+        @keyframes pulseWhatsapp {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(16,185,129,.35);
+            }
+
+            50% {
+                box-shadow: 0 0 0 14px rgba(16,185,129,0);
+            }
+        }
+
+        /* Mobile menu */
+
+        #mobileMenu {
+            transition: max-height .3s ease, opacity .3s ease;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        #mobileMenu.open {
+            max-height: 600px;
+            opacity: 1;
+        }
+
+        /* Search */
+
+        .search-result {
+            transition: .2s ease;
+        }
+
+        .search-result:hover {
+            transform: translateY(-2px);
+        }
+
+        /* FAQ */
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Status */
+
+        .status-dot {
+            animation: statusPulse 1.8s infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .4;
+            }
+        }
+
+        /* Dark mode adjustments */
+
+        .dark body {
+            background: #020617;
+            color: #e2e8f0;
+        }
+
+        .dark .card-light {
+            background: #0f172a !important;
+            border-color: #1e293b !important;
+        }
+
+        .dark .text-dark {
+            color: #f1f5f9 !important;
+        }
+
+        .dark .text-muted {
+            color: #94a3b8 !important;
+        }
+
+        /* Hide */
+
+        .hidden-important {
+            display: none !important;
+        }
+
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 dir-rtl">
 
-    <!-- Top Bar -->
-    <div class="bg-brandGreen text-white py-2 text-xs md:text-sm px-4 border-b border-brandLightGreen/30">
-        <div class="max-w-7xl mx-auto flex justify-between items-center overflow-x-auto whitespace-nowrap gap-4 scrollbar-none">
-            <div class="flex items-center gap-3">
-                <span class="flex items-center gap-1"><i class="fa-solid fa-location-dot text-brandGold ml-1"></i> حي بن الزين، الحجيرة، توقرت</span>
-                <span class="text-brandGold/40">|</span>
-                <a href="tel:+213699181993" class="hover:text-brandGold transition flex items-center gap-1"><i class="fa-solid fa-phone text-brandGold ml-1"></i> العام: <span dir="ltr">0699 18 19 93</span></a>
-                <span class="text-brandGold/40">|</span>
-                <a href="tel:+213699854192" class="hover:text-brandGold transition flex items-center gap-1"><i class="fa-solid fa-person-dress text-brandGold ml-1"></i> النساء: <span dir="ltr">0699 85 41 92</span></a>
-                <span class="text-brandGold/40">|</span>
-                <a href="tel:+213673347137" class="hover:text-brandGold transition flex items-center gap-1"><i class="fa-solid fa-person text-brandGold ml-1"></i> الرجال: <span dir="ltr">0673 34 71 37</span></a>
-            </div>
-            <div class="flex items-center gap-3">
-                <a href="mailto:maryedschool@gmail.com" class="hover:text-brandGold transition flex items-center gap-1"><i class="fa-solid fa-envelope text-brandGold ml-1"></i> maryedschool@gmail.com</a>
-                <a href="https://www.facebook.com/maryedschool" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-0.5 rounded text-xs font-medium transition inline-flex items-center gap-1">
-                    <i class="fa-brands fa-facebook"></i> فيسبوك
-                </a>
-            </div>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-200">
+
+<!-- =========================================================
+     TOP BAR
+========================================================= -->
+
+<div class="bg-brandGreen text-white text-xs border-b border-white/10">
+
+    <div class="max-w-7xl mx-auto px-4 py-2
+                flex items-center justify-between gap-4
+                overflow-x-auto whitespace-nowrap">
+
+        <div class="flex items-center gap-4">
+
+            <span class="flex items-center gap-1.5">
+                <i class="fa-solid fa-location-dot text-brandGold"></i>
+                حي بن الزين، الحجيرة، توقرت
+            </span>
+
+            <span class="opacity-30">|</span>
+
+            <a href="tel:+213699181993"
+               class="hover:text-brandGold transition">
+                <i class="fa-solid fa-phone text-brandGold"></i>
+                الرقم العام:
+                <span dir="ltr">0699 18 19 93</span>
+            </a>
+
         </div>
+
+        <div class="flex items-center gap-3">
+
+            <a href="mailto:maryedschool@gmail.com"
+               class="hover:text-brandGold transition">
+                <i class="fa-solid fa-envelope text-brandGold"></i>
+                maryedschool@gmail.com
+            </a>
+
+            <a href="https://www.facebook.com/maryedschool"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="صفحة مدرسة ماري على فيسبوك"
+               class="bg-blue-600 hover:bg-blue-700
+                      text-white px-2.5 py-1 rounded-lg
+                      transition">
+
+                <i class="fa-brands fa-facebook"></i>
+
+            </a>
+
+        </div>
+
     </div>
 
-    <!-- Navigation Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-2.5 flex justify-between items-center gap-2">
-            <!-- Logo -->
-            <div class="flex items-center gap-2.5 shrink-0">
-                <div class="bg-brandGreen text-white w-10 h-10 rounded-xl flex items-center justify-center text-xl font-extrabold shadow-md border border-brandLightGreen/30">
-                    M
-                </div>
-                <div>
-                    <h1 class="text-lg font-bold text-brandGreen leading-tight">مدرسة ماري</h1>
-                    <p class="text-[10px] text-gray-500 font-medium">MARY SCHOOL</p>
-                </div>
+</div>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="sticky top-0 z-50
+               bg-white/95 dark:bg-slate-950/95
+               backdrop-blur-md
+               border-b border-slate-200 dark:border-slate-800
+               shadow-sm">
+
+    <div class="max-w-7xl mx-auto px-4 py-3
+                flex items-center justify-between gap-4">
+
+        <!-- Logo -->
+
+        <a href="#home"
+           class="flex items-center gap-3 shrink-0">
+
+            <div class="w-11 h-11 rounded-2xl
+                        bg-brandGreen text-white
+                        flex items-center justify-center
+                        text-xl font-black shadow-md">
+
+                M
+
             </div>
 
-            <!-- Desktop Menu -->
-            <nav class="hidden xl:flex items-center gap-4 font-semibold text-gray-700 text-sm whitespace-nowrap">
-                <a href="#home" class="hover:text-brandLightGreen transition">الرئيسية</a>
-                <a href="#nursery" class="hover:text-brandLightGreen transition">روضة عدنان ولينا</a>
-                <a href="#levels" class="hover:text-brandLightGreen transition">الأطوار التعليمية</a>
-                <a href="#courses" class="hover:text-brandLightGreen transition">الدورات والدعم</a>
-                <a href="#register" class="hover:text-brandLightGreen transition">التسجيل الأولي</a>
-                <a href="#location" class="hover:text-brandLightGreen transition">موقعنا الجغرافي</a>
-                <a href="#faq" class="hover:text-brandLightGreen transition">الأسئلة الشائعة</a>
-                <a href="#contact" class="hover:text-brandLightGreen transition">تواصل معنا</a>
-            </nav>
+            <div>
 
-            <!-- CTA Buttons -->
-            <div class="flex items-center gap-2 shrink-0">
-                <a href="https://wa.me/213673347137" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-full font-bold shadow-sm hover:bg-emerald-700 transition text-xs whitespace-nowrap">
-                    <i class="fa-brands fa-whatsapp text-sm"></i> واتساب الرجال
-                </a>
-                <a href="tel:0699854192" class="hidden sm:inline-flex items-center gap-1.5 bg-pink-600 text-white px-3 py-1.5 rounded-full font-bold shadow-sm hover:bg-pink-700 transition text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-phone text-xs"></i> هاتف النساء
-                </a>
-
-                <!-- Mobile Hamburger Button -->
-                <button id="menu-btn" class="xl:hidden text-gray-700 text-2xl focus:outline-none p-1">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile/Tablet Menu Drawer -->
-        <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-3 font-semibold text-gray-700 shadow-xl">
-            <a href="#home" class="block hover:text-brandGreen transition">الرئيسية</a>
-            <a href="#nursery" class="block hover:text-brandGreen transition">روضة عدنان ولينا</a>
-            <a href="#levels" class="block hover:text-brandGreen transition">الأطوار التعليمية</a>
-            <a href="#courses" class="block hover:text-brandGreen transition">الدورات والدعم</a>
-            <a href="#register" class="block hover:text-brandGreen transition">التسجيل الأولي</a>
-            <a href="#location" class="block hover:text-brandGreen transition">موقعنا الجغرافي</a>
-            <a href="#faq" class="block hover:text-brandGreen transition">الأسئلة الشائعة</a>
-            <a href="#contact" class="block hover:text-brandGreen transition">تواصل معنا</a>
-            <div class="pt-3 border-t border-gray-200 flex flex-col gap-2">
-                <a href="https://wa.me/213673347137" target="_blank" class="bg-emerald-600 text-white text-center py-2 rounded-xl font-bold text-xs shadow"><i class="fa-brands fa-whatsapp ml-1"></i> واتساب الرجال (0673347137)</a>
-                <a href="tel:0699854192" class="bg-pink-600 text-white text-center py-2 rounded-xl font-bold text-xs shadow"><i class="fa-solid fa-phone ml-1"></i> هاتف النساء (0699854192)</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home" class="relative bg-gradient-to-br from-brandGreen via-brandLightGreen to-emerald-900 text-white py-20 px-4 overflow-hidden">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div class="space-y-6 text-center md:text-right">
-                <span class="inline-block bg-brandGold/20 text-brandGold border border-brandGold/40 px-4 py-1.5 rounded-full text-sm font-bold shadow-sm">
-                    🎓 بيت المعرفة الدائم والتأسيس المتين
-                </span>
-                <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
-                    بيئة تعليمية متكاملة لجميع المستويات والتحضير للتميز
+                <h1 class="font-black text-brandGreen dark:text-white leading-tight">
+                    مدرسة ماري
                 </h1>
-                <p class="text-gray-200 text-base md:text-lg leading-relaxed">
-                    نرافق أبناءكم من المهد إلى النجاح عبر أحدث المناهج التربوية والدعم المخصص في مختلف المواد لجميع الأطوار التعليمية بالحجيرة.
+
+                <p class="text-[10px] text-slate-500">
+                    MARY SCHOOL
                 </p>
-                <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
-                    <a href="#register" class="bg-brandGold text-slate-900 px-7 py-3 rounded-xl font-bold shadow-lg hover:bg-yellow-400 transition">
-                        سجل تلميذاً الآن
-                    </a>
-                    <a href="#location" class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-7 py-3 rounded-xl font-bold hover:bg-white/20 transition">
-                        موقعنا على الخريطة
-                    </a>
-                </div>
+
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center shadow-lg">
-                    <i class="fa-solid fa-user-graduate text-3xl text-brandGold mb-3"></i>
-                    <h3 class="font-bold text-lg">كادر كفء</h3>
-                    <p class="text-xs text-gray-200 mt-1">أساتذة ومربيات ذوو خبرة عالية</p>
-                </div>
-                <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center shadow-lg">
-                    <i class="fa-solid fa-child text-3xl text-brandGold mb-3"></i>
-                    <h3 class="font-bold text-lg">روضة وحضانة</h3>
-                    <p class="text-xs text-gray-200 mt-1">عالم آمن وممتع لأطفالكم</p>
-                </div>
-                <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center shadow-lg">
-                    <i class="fa-solid fa-book-open text-3xl text-brandGold mb-3"></i>
-                    <h3 class="font-bold text-lg">دروس دعم</h3>
-                    <p class="text-xs text-gray-200 mt-1">متابعة دقيقة وتحضير للشهادات</p>
-                </div>
-                <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center shadow-lg">
-                    <i class="fa-solid fa-map-location-dot text-3xl text-brandGold mb-3"></i>
-                    <h3 class="font-bold text-lg">موقع سهل الوصول</h3>
-                    <p class="text-xs text-gray-200 mt-1">حي بن الزين، الحجيرة</p>
-                </div>
-            </div>
+        </a>
+
+
+        <!-- Desktop Navigation -->
+
+        <nav class="hidden lg:flex items-center gap-5
+                    text-sm font-bold text-slate-600
+                    dark:text-slate-300">
+
+            <a href="#home" class="nav-link hover:text-brandGreen transition">
+                الرئيسية
+            </a>
+
+            <a href="#nursery" class="nav-link hover:text-brandGreen transition">
+                الروضة
+            </a>
+
+            <a href="#levels" class="nav-link hover:text-brandGreen transition">
+                الأطوار
+            </a>
+
+            <a href="#courses" class="nav-link hover:text-brandGreen transition">
+                الدورات
+            </a>
+
+            <a href="#register" class="nav-link hover:text-brandGreen transition">
+                التسجيل
+            </a>
+
+            <a href="#location" class="nav-link hover:text-brandGreen transition">
+                موقعنا
+            </a>
+
+            <a href="#faq" class="nav-link hover:text-brandGreen transition">
+                FAQ
+            </a>
+
+            <a href="#contact" class="nav-link hover:text-brandGreen transition">
+                اتصل بنا
+            </a>
+
+        </nav>
+
+
+        <!-- Actions -->
+
+        <div class="flex items-center gap-2">
+
+            <!-- Dark Mode -->
+
+            <button id="themeBtn"
+                    type="button"
+                    aria-label="تغيير المظهر"
+                    class="w-10 h-10 rounded-xl
+                           bg-slate-100 dark:bg-slate-800
+                           text-slate-700 dark:text-yellow-300
+                           hover:bg-slate-200 dark:hover:bg-slate-700
+                           transition">
+
+                <i id="themeIcon" class="fa-solid fa-moon"></i>
+
+            </button>
+
+
+            <!-- WhatsApp -->
+
+            <a href="https://wa.me/213673347137"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="hidden sm:inline-flex
+                      items-center gap-2
+                      bg-emerald-600 hover:bg-emerald-700
+                      text-white px-4 py-2.5
+                      rounded-xl font-bold text-xs
+                      transition shadow-sm">
+
+                <i class="fa-brands fa-whatsapp text-base"></i>
+                واتساب
+
+            </a>
+
+
+            <!-- Mobile -->
+
+            <button id="menuBtn"
+                    type="button"
+                    aria-label="فتح القائمة"
+                    class="lg:hidden w-10 h-10 rounded-xl
+                           bg-slate-100 dark:bg-slate-800
+                           text-slate-700 dark:text-white">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
         </div>
-    </section>
 
-    <!-- Nursery Section -->
-    <section id="nursery" class="py-16 px-4 bg-amber-50/50">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-amber-700 font-bold text-sm bg-amber-100 px-3.5 py-1 rounded-full border border-amber-200">الطفولة المبكرة</span>
-                <h2 class="text-3xl font-extrabold text-slate-800 mt-3">روضة وحضانة عدنان ولينا</h2>
-                <p class="text-gray-600 mt-2">بيئة آمنة ومحفزة تمنح أطفالكم الرعاية الكاملة والتأسيس السليم تحت إشراف مدرسة ماري</p>
+    </div>
+
+
+    <!-- Mobile Menu -->
+
+    <div id="mobileMenu"
+         class="lg:hidden
+                border-t border-slate-200 dark:border-slate-800
+                bg-white dark:bg-slate-950">
+
+        <div class="px-5 py-5 space-y-2">
+
+            <a href="#home" class="mobile-link">الرئيسية</a>
+            <a href="#nursery" class="mobile-link">الروضة</a>
+            <a href="#levels" class="mobile-link">الأطوار التعليمية</a>
+            <a href="#courses" class="mobile-link">الدورات والدعم</a>
+            <a href="#register" class="mobile-link">التسجيل الأولي</a>
+            <a href="#location" class="mobile-link">موقعنا</a>
+            <a href="#faq" class="mobile-link">الأسئلة الشائعة</a>
+            <a href="#contact" class="mobile-link">تواصل معنا</a>
+
+            <div class="pt-3 border-t border-slate-200 dark:border-slate-800">
+
+                <a href="tel:+213699854192"
+                   class="block text-center
+                          bg-pink-600 text-white
+                          rounded-xl py-3 font-bold text-sm">
+
+                    <i class="fa-solid fa-phone ml-1"></i>
+                    قسم النساء
+                    <span dir="ltr">0699 85 41 92</span>
+
+                </a>
+
             </div>
 
-            <div class="bg-white rounded-3xl shadow-xl border border-amber-100 p-8 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-                <div class="space-y-6">
-                    <div class="flex items-start gap-4">
-                        <div class="bg-amber-100 text-amber-700 p-3 rounded-2xl text-xl font-bold shadow-sm"><i class="fa-solid fa-shield-heart"></i></div>
-                        <div>
-                            <h4 class="font-bold text-lg text-slate-800">أمان ورعاية فائقة</h4>
-                            <p class="text-sm text-gray-600 mt-1">مرافقة مستمرة من مربيات متخصصات في الطفولة المبكرة.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4">
-                        <div class="bg-amber-100 text-amber-700 p-3 rounded-2xl text-xl font-bold shadow-sm"><i class="fa-solid fa-shapes"></i></div>
-                        <div>
-                            <h4 class="font-bold text-lg text-slate-800">أنشطة تفاعلية وترفيهية</h4>
-                            <p class="text-sm text-gray-600 mt-1">تنمية المهارات الحركية، الذهنية والتواصل الاجتماعي.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center bg-gradient-to-b from-amber-100 to-amber-200 p-8 rounded-3xl shadow-inner border border-amber-200">
-                    <div class="text-5xl mb-3">🧸🎨🎈</div>
-                    <h3 class="text-2xl font-bold text-slate-800">عالمكم الآمن والممتع</h3>
-                    <p class="text-sm text-slate-700 mt-2 leading-relaxed">نحتضن أطفالكم بنشاطات رسم، حفظ، وألعاب ذكاء متطورة.</p>
-                    <a href="tel:0699854192" class="mt-5 inline-block bg-pink-600 text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow-md hover:bg-pink-700 transition">
-                        <i class="fa-solid fa-phone ml-1"></i> استفسار الروضة (قسم النساء): <span dir="ltr">0699 85 41 92</span>
-                    </a>
-                </div>
-
-                <div class="space-y-6">
-                    <div class="flex items-start gap-4">
-                        <div class="bg-amber-100 text-amber-700 p-3 rounded-2xl text-xl font-bold shadow-sm"><i class="fa-solid fa-brain"></i></div>
-                        <div>
-                            <h4 class="font-bold text-lg text-slate-800">تأسيس لغوي وذهني</h4>
-                            <p class="text-sm text-gray-600 mt-1">تحضير سلس ومتقن لدخول مرحلة التعليم الابتدائي.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4">
-                        <div class="bg-amber-100 text-amber-700 p-3 rounded-2xl text-xl font-bold shadow-sm"><i class="fa-solid fa-clock"></i></div>
-                        <div>
-                            <h4 class="font-bold text-lg text-slate-800">أوقات مرنة</h4>
-                            <p class="text-sm text-gray-600 mt-1">جدولة تناسب احتياجات الأولياء مع متابعة يومية دقيقة.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-    </section>
 
-    <!-- Educational Levels -->
-   <!-- Educational Levels & Available Subjects -->
-    <section id="levels" class="py-16 px-4 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-brandLightGreen font-bold text-sm bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-100">متابعة فورية</span>
-                <h2 class="text-3xl font-extrabold text-slate-800 mt-3">الأطوار، المواد المتاحة وحالة التسجيل</h2>
-                <p class="text-gray-600 mt-2">تعرف على المواد المقررة في كل طور وحالة المقاعد المتاحة للتسجيل اليوم</p>
-            </div>
+    </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <!-- Primary Level -->
-                <div class="border border-gray-200 rounded-3xl p-7 shadow-sm hover:shadow-md transition bg-slate-50/70 flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-14 h-14 bg-emerald-100 text-brandGreen rounded-2xl flex items-center justify-center text-2xl font-bold shadow-sm">
-                                <i class="fa-solid fa-pen-ruler"></i>
-                            </div>
-                            <!-- تحكم هنا: استبدال الكلاس والنص لفتح أو إغلاق التسجيل -->
-                           <!--  <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> التسجيل مفتوح
-                            </span> -->
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> التسجيل مفتوح
-                            </span>
-                        </div>
-                        <h3 class="text-xl font-bold text-brandGreen">التعليم الابتدائي</h3>
-                        <p class="text-xs text-gray-500 mt-1">تأسيس متين ومعالجة النقائص</p>
-                        
-                        <div class="mt-4 space-y-2">
-                            <p class="text-xs font-bold text-slate-700">المواد والمقاعد المتوفرة:</p>
-                            <ul class="text-xs text-gray-600 space-y-1.5 list-disc list-inside bg-white p-3 rounded-xl border border-gray-200">
-                                <li>اللغة العربية (غير متاح حاليا)</li>
-                               <li>الرياضيات (غير متاح حاليا)</li>
-                                <li>اللغة الفرنسية (غير متاح حاليا)</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-200">
-                        <a href="#register" class="block text-center bg-brandGreen text-white text-xs font-bold py-2.5 rounded-xl hover:bg-brandLightGreen transition">سجل في الابتدائي ←</a>
-                    </div>
-                </div>
+</header>
 
-                <!-- Middle Level -->
-                <div class="border border-gray-200 rounded-3xl p-7 shadow-sm hover:shadow-md transition bg-slate-50/70 flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-14 h-14 bg-blue-100 text-blue-700 rounded-2xl flex items-center justify-center text-2xl font-bold shadow-sm">
-                                <i class="fa-solid fa-laptop-code"></i>
-                            </div>
-                            <!-- حالة التسجيل -->
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> التسجيل مفتوح
-                            </span>
-                        </div>
-                        <h3 class="text-xl font-bold text-blue-900">التعليم المتوسط</h3>
-                        <p class="text-xs text-gray-500 mt-1">التحضير لشهادة التعليم المتوسط BEM</p>
-                        
-                        <div class="mt-4 space-y-2">
-                            <p class="text-xs font-bold text-slate-700">المواد والمقاعد المتوفرة:</p>
-                            <ul class="text-xs text-gray-600 space-y-1.5 list-disc list-inside bg-white p-3 rounded-xl border border-gray-200">
-                                <li>الرياضيات (غير متاح حاليا)</li>
-                                <li>الفيزياء والعلوم (غير متاح حاليا)</li>
-                                <li>(غير متاح حاليا)اللغات (إنجليزي / فرنسي)</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-200">
-                        <a href="#register" class="block text-center bg-blue-700 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-blue-800 transition">سجل في المتوسط ←</a>
-                    </div>
-                </div>
 
-                <!-- Secondary / Bac Prep -->
-                <div class="border border-gray-200 rounded-3xl p-7 shadow-sm hover:shadow-md transition bg-slate-50/70 flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-14 h-14 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center text-2xl font-bold shadow-sm">
-                                <i class="fa-solid fa-graduation-cap"></i>
-                            </div>
-                            <!-- مثال على إغلاق التسجيل أو اكتمال العدد -->
-                             <!-- <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-                                <span class="w-2 h-2 rounded-full bg-rose-500"></span> العدد مكتمل
-                            </span>
-                             -->
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> التسجيل مفتوح
-                            </span>
-                        </div>
-                        <h3 class="text-xl font-bold text-amber-800">التعليم الثانوي والشهادات</h3>
-                        <p class="text-xs text-gray-500 mt-1">التحضير المكثف للبكالوريا BAC</p>
-                        
-                        <div class="mt-4 space-y-2">
-                            <p class="text-xs font-bold text-slate-700">المواد والمقاعد المتوفرة:</p>
-                            <ul class="text-xs text-gray-600 space-y-1.5 list-disc list-inside bg-white p-3 rounded-xl border border-gray-200">
-                                <li>رياضيات - نهائي (غير متاح حاليا)</li>
-                                <li>علوم الطبيعة (غير متاح حاليا)</li>
-                                <li>الفيزياء (قائمة الانتظار مفتوحة)</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-200">
-                        <a href="#register" class="block text-center bg-slate-300 text-slate-700 text-xs font-bold py-2.5 rounded-xl hover:bg-slate-400 transition">التسجيل في قائمة الانتظار</a>
-                    </div>
-                </div>
+<!-- =========================================================
+     HERO
+========================================================= -->
 
-            </div>
-        </div>
-    </section>
+<section id="home"
+         class="relative overflow-hidden
+                bg-gradient-to-br
+                from-brandGreen via-brandLightGreen to-emerald-950
+                text-white hero-pattern">
 
-    <!-- Summer & Training Courses -->
-    <section id="courses" class="py-16 px-4 bg-slate-900 text-white">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div class="space-y-5">
-                <span class="text-brandGold text-sm font-bold bg-brandGold/10 px-3.5 py-1 rounded-full border border-brandGold/30">أنشطة وتكوين مستمر</span>
-                <h2 class="text-3xl font-bold leading-tight">الدورات التكوينية ودروس الدعم المكثفة</h2>
-                <p class="text-gray-300 leading-relaxed">
-                    نقدم خلال المواسم الدراسية والعطل دورات متخصصة في العلوم، اللغات، والأنشطة الذهنية لاستغلال الوقت وتجهيز التلاميذ للموسم الدراسي بثقة وثبات.
+    <div class="absolute inset-0 bg-black/10"></div>
+
+    <div class="relative max-w-7xl mx-auto
+                px-4 py-20 md:py-28">
+
+        <div class="grid lg:grid-cols-2 gap-14
+                    items-center">
+
+            <!-- Content -->
+
+            <div class="text-center lg:text-right reveal">
+
+                <span class="inline-flex items-center gap-2
+                             bg-brandGold/15
+                             border border-brandGold/30
+                             text-brandGold
+                             px-4 py-2 rounded-full
+                             text-sm font-bold">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    بيت المعرفة والتأسيس المتين
+
+                </span>
+
+
+                <h2 class="mt-6
+                           text-4xl md:text-5xl xl:text-6xl
+                           font-black leading-tight">
+
+                    نرافق أبناءكم
+                    <span class="text-brandGold">
+                        نحو المعرفة والتميز
+                    </span>
+
+                </h2>
+
+
+                <p class="mt-6 text-slate-200
+                          text-base md:text-lg
+                          leading-8 max-w-2xl mx-auto lg:mr-0">
+
+                    بيئة تعليمية متكاملة تجمع بين
+                    الرعاية، التأسيس، دروس الدعم،
+                    والدورات التكوينية لجميع الأطوار
+                    التعليمية بالحجيرة.
+
                 </p>
-                <ul class="space-y-2.5 text-sm text-gray-300 pt-2">
-                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-brandGold"></i> مراجعة وتشخيص المكتسبات القبلية بدقة</li>
-                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-brandGold"></i> مقاعد محدودة لضمان التركيز الكامل داخل القاعة</li>
-                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-brandGold"></i> الالتزام بالمتابعة الدورية والتقييم المستمر</li>
-                </ul>
-            </div>
-            <div class="bg-brandGreen/40 p-8 rounded-3xl border border-brandGreen/60 text-center space-y-5 shadow-2xl backdrop-blur-sm">
-                <h3 class="text-2xl font-bold text-brandGold">هل تريد حجز مقعد لتلميذكم؟</h3>
-                <p class="text-sm text-gray-200">سارع بالتسجيل أو الاستفسار عن المواعيد عبر التواصل الفوري مع الإدارة.</p>
-                <div class="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-                    <a href="tel:0673347137" class="bg-brandGold text-slate-900 font-bold px-6 py-3 rounded-xl hover:bg-yellow-400 transition shadow-lg text-sm flex items-center justify-center gap-1">
-                        <i class="fa-solid fa-person"></i> الرجال: <span dir="ltr">0673 34 71 37</span>
+
+
+                <div class="mt-8
+                            flex flex-wrap
+                            justify-center lg:justify-start
+                            gap-3">
+
+                    <button onclick="openRegistrationModal()"
+                            class="bg-brandGold text-slate-950
+                                   px-7 py-3.5
+                                   rounded-xl font-black
+                                   shadow-lg hover:bg-yellow-400
+                                   transition">
+
+                        <i class="fa-solid fa-pen-to-square ml-2"></i>
+                        التسجيل الأولي
+
+                    </button>
+
+
+                    <a href="#levels"
+                       class="bg-white/10
+                              border border-white/20
+                              backdrop-blur-md
+                              px-7 py-3.5
+                              rounded-xl font-bold
+                              hover:bg-white/20 transition">
+
+                        اكتشف خدماتنا
+                        <i class="fa-solid fa-arrow-down mr-1"></i>
+
                     </a>
-                    <a href="tel:0699854192" class="bg-pink-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-pink-700 transition shadow-lg text-sm flex items-center justify-center gap-1">
-                        <i class="fa-solid fa-person-dress"></i> النساء: <span dir="ltr">0699 85 41 92</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Online Pre-Registration Form (مُحدث مع خاصية الإرسال الفوري للواتساب) -->
-    <section id="register" class="py-16 px-4 bg-emerald-50/40">
-        <div class="max-w-3xl mx-auto bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-emerald-100">
-            <div class="text-center mb-8">
-                <span class="text-brandGreen font-bold text-xs bg-emerald-100 px-3.5 py-1 rounded-full">خدمة إلكترونية فورية</span>
-                <h2 class="text-3xl font-extrabold text-slate-800 mt-2">استمارة التسجيل الأولي</h2>
-                <p class="text-gray-600 text-sm mt-1">قم بتعبئة البيانات أدناه ليتم إرسال طلبكم مباشرة عبر الواتساب إلى إدارة المدرسة</p>
-            </div>
-
-            <form id="pre-reg-form" class="space-y-4" onsubmit="handleFormSubmit(event)">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1.5">اسم ولقب الولي</label>
-                        <input type="text" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brandGreen focus:outline-none text-sm bg-slate-50/50" placeholder="مثال: محمد بن علي">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1.5">اسم ولقب التلميذ</label>
-                        <input type="text" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brandGreen focus:outline-none text-sm bg-slate-50/50" placeholder="مثال: أحمد بن علي">
-                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1.5">الطور التعليمي المطلوب</label>
-                        <select required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brandGreen focus:outline-none bg-white text-sm">
-                            <option value="">اختر الطور التعليمي...</option>
-                            <option value="روضة وحضانة عدنان ولينا">روضة وحضانة عدنان ولينا</option>
-                            <option value="الطور الابتدائي">الطور الابتدائي</option>
-                            <option value="الطور المتوسط">الطور المتوسط</option>
-                            <option value="الطور الثانوي والتحضير للبكالوريا">الطور الثانوي والتحضير للبكالوريا</option>
-                            <option value="دورات تكوينية ودعم مكثف">دورات تكوينية ودعم مكثف</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1.5">رقم هاتف التواصل</label>
-                        <input type="tel" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brandGreen focus:outline-none text-sm bg-slate-50/50" placeholder="06XXXXXXXX" dir="ltr">
-                    </div>
+
+                <div class="mt-7
+                            flex flex-wrap
+                            justify-center lg:justify-start
+                            gap-4 text-xs text-slate-300">
+
+                    <span>
+                        <i class="fa-solid fa-circle-check text-brandGold"></i>
+                        روضة وحضانة
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-circle-check text-brandGold"></i>
+                        دروس دعم
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-circle-check text-brandGold"></i>
+                        دورات تكوينية
+                    </span>
+
                 </div>
 
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-1.5">ملاحظات أو مواد خاصة (اختياري)</label>
-                    <textarea rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brandGreen focus:outline-none text-sm bg-slate-50/50" placeholder="اذكر المواد المطلوبة أو أي استفسار آخر..."></textarea>
-                </div>
-
-                <button type="submit" class="w-full bg-brandGreen text-white font-bold py-3.5 rounded-xl shadow-lg hover:bg-brandLightGreen transition text-base">
-                    <i class="fa-brands fa-whatsapp ml-2 text-lg"></i> إرسال الطلب فوراً عبر الواتساب للإدارة
-                </button>
-            </form>
-            <div id="form-success" class="hidden mt-4 p-4 bg-emerald-100 text-emerald-800 rounded-xl text-center font-bold text-sm border border-emerald-200 shadow-sm">
-                ✅ تم إرسال طلبكم بنجاح وتم فتح محادثة الواتساب مع الإدارة! سنقوم بالتواصل معكم لتأكيد التسجيل.
-            </div>
-        </div>
-    </section>
-
-    <!-- Location & Google Maps Section -->
-    <section id="location" class="py-16 px-4 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-brandGreen font-bold text-sm bg-emerald-100 px-3.5 py-1 rounded-full">الوصول إلينا بسهولة</span>
-                <h2 class="text-3xl font-extrabold text-slate-800 mt-2">موقع المؤسسة الجغرافي</h2>
-                <p class="text-gray-600 mt-2">تتواجد مدرسة وروضة ماري في قلب مدينة الحجيرة لتكون قريبة منكم دائماً. تفضلوا بزيارتنا في المقر الرئيسي.</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center bg-slate-50 p-6 md:p-8 rounded-3xl border border-gray-200 shadow-sm">
-                <div class="space-y-6 lg:col-span-1">
-                    <div class="flex items-start gap-4">
-                        <div class="bg-emerald-100 text-brandGreen p-3.5 rounded-2xl text-xl font-bold shadow-sm shrink-0">
-                            <i class="fa-solid fa-map-pin"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-lg text-slate-800">العنوان الدقيق</h4>
-                            <p class="text-sm text-gray-600 mt-1 leading-relaxed">حي بن الزين، بلدية الحجيرة، ولاية توقرت، الجزائر.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4">
-                        <div class="bg-emerald-100 text-brandGreen p-3.5 rounded-2xl text-xl font-bold shadow-sm shrink-0">
-                            <i class="fa-solid fa-compass"></i></div>
-                        <div>
-                            <h4 class="font-bold text-lg text-slate-800">سهولة التنقل</h4>
-                            <p class="text-sm text-gray-600 mt-1 leading-relaxed">المقر يتميز بموقع استراتيجي يسهل الوصول إليه عبر الطرق الرئيسية في حي بن الزين مع توفر مساحات مريحة للركن والاستقبال.</p>
-                        </div>
-                    </div>
-                    <div class="pt-4">
-                        <a href="https://www.google.com/maps/place/(%D9%85%D8%AF%D8%B1%D8%B3%D8%A9+%D9%88+%D8%B1%D9%88%D8%B6%D8%A9)mary+school%E2%80%AD/@32.6170966,5.5151436,21z/data=!4m6!3m5!1s" target="_blank" rel="noopener noreferrer" class="w-full bg-brandGreen text-white font-bold py-3.5 px-6 rounded-xl shadow hover:bg-brandLightGreen transition inline-flex items-center justify-center gap-2 text-sm text-center">
-                            <i class="fa-solid fa-location-arrow"></i> فتح الموقع مباشرة على خرائط جوجل (Google Maps)
-                        </a>
-                    </div>
-                </div>
 
-                <div class="lg:col-span-2 bg-gradient-to-br from-emerald-900 to-brandGreen rounded-2xl p-8 text-white shadow-xl relative overflow-hidden flex flex-col justify-center items-center text-center space-y-4">
-                    <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
-                        <i class="fa-solid fa-map"></i>
+            <!-- Feature cards -->
+
+            <div class="grid grid-cols-2 gap-4 reveal">
+
+                <div class="glass border border-white/10
+                            rounded-3xl p-6
+                            text-center shadow-xl">
+
+                    <div class="w-14 h-14 mx-auto
+                                rounded-2xl bg-brandGold/15
+                                text-brandGold
+                                flex items-center justify-center
+                                text-2xl">
+
+                        <i class="fa-solid fa-child"></i>
+
                     </div>
-                    <div class="w-16 h-16 bg-brandGold text-slate-900 rounded-full flex items-center justify-center text-3xl shadow-lg mb-2">
-                        <i class="fa-solid fa-school"></i>
-                    </div>
-                    <h3 class="text-2xl font-extrabold text-brandGold">مدرسة وروضة ماري - Mary School</h3>
-                    <p class="text-sm text-gray-200 max-w-md mx-auto leading-relaxed">
-                        يسعدنا استقبالكم طيلة أيام الأسبوع للإجابة عن استفساراتكم ومعاينة أقسام الروضة ومؤسسة الدعم المدرسي عن قرب.
+
+                    <h3 class="mt-4 font-black text-lg">
+                        روضة وحضانة
+                    </h3>
+
+                    <p class="text-xs text-slate-300 mt-2 leading-6">
+                        بيئة آمنة ومحفزة للأطفال
                     </p>
-                    <div class="pt-2">
-                        <a href="https://www.google.com/maps/place/(%D9%85%D8%AF%D8%B1%D8%B3%D8%A9+%D9%88+%D8%B1%D9%88%D8%B6%D8%A9)mary+school%E2%80%AD/@32.6170966,5.5151436,21z/data=!4m6!3m5!1s" target="_blank" rel="noopener noreferrer" class="bg-white text-slate-900 font-bold px-6 py-2.5 rounded-xl shadow hover:bg-gray-100 transition text-xs inline-flex items-center gap-1.5">
-                            <i class="fa-solid fa-external-link-alt text-brandGreen"></i> الانتقال إلى خرائط جوجل لتحديد الاتجاهات
-                        </a>
-                    </div>
+
                 </div>
+
+
+                <div class="glass border border-white/10
+                            rounded-3xl p-6
+                            text-center shadow-xl">
+
+                    <div class="w-14 h-14 mx-auto
+                                rounded-2xl bg-brandGold/15
+                                text-brandGold
+                                flex items-center justify-center
+                                text-2xl">
+
+                        <i class="fa-solid fa-book-open"></i>
+
+                    </div>
+
+                    <h3 class="mt-4 font-black text-lg">
+                        دروس الدعم
+                    </h3>
+
+                    <p class="text-xs text-slate-300 mt-2 leading-6">
+                        متابعة وتأسيس حسب الحاجة
+                    </p>
+
+                </div>
+
+
+                <div class="glass border border-white/10
+                            rounded-3xl p-6
+                            text-center shadow-xl">
+
+                    <div class="w-14 h-14 mx-auto
+                                rounded-2xl bg-brandGold/15
+                                text-brandGold
+                                flex items-center justify-center
+                                text-2xl">
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                    </div>
+
+                    <h3 class="mt-4 font-black text-lg">
+                        تحضير الشهادات
+                    </h3>
+
+                    <p class="text-xs text-slate-300 mt-2 leading-6">
+                        BEM و BAC حسب البرامج المتاحة
+                    </p>
+
+                </div>
+
+
+                <div class="glass border border-white/10
+                            rounded-3xl p-6
+                            text-center shadow-xl">
+
+                    <div class="w-14 h-14 mx-auto
+                                rounded-2xl bg-brandGold/15
+                                text-brandGold
+                                flex items-center justify-center
+                                text-2xl">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                    </div>
+
+                    <h3 class="mt-4 font-black text-lg">
+                        موقعنا
+                    </h3>
+
+                    <p class="text-xs text-slate-300 mt-2 leading-6">
+                        حي بن الزين، الحجيرة
+                    </p>
+
+                </div>
+
             </div>
+
         </div>
-    </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="py-16 px-4 bg-slate-50 border-t border-gray-200">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <span class="text-brandGreen font-bold text-xs bg-emerald-100 px-3.5 py-1 rounded-full">توضيحات تهمكم</span>
-                <h2 class="text-3xl font-extrabold text-slate-800 mt-2">الأسئلة الشائعة</h2>
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     QUICK SERVICES
+========================================================= -->
+
+<section class="relative -mt-8 z-10 px-4">
+
+    <div class="max-w-6xl mx-auto
+                grid grid-cols-2 md:grid-cols-4
+                bg-white dark:bg-slate-900
+                rounded-3xl shadow-soft
+                border border-slate-200
+                dark:border-slate-800
+                overflow-hidden">
+
+        <a href="#nursery"
+           class="p-5 text-center
+                  hover:bg-amber-50
+                  dark:hover:bg-slate-800
+                  transition border-l border-slate-200
+                  dark:border-slate-800">
+
+            <i class="fa-solid fa-child-reaching
+                     text-amber-600 text-2xl"></i>
+
+            <p class="font-bold text-sm mt-2">
+                الروضة
+            </p>
+
+        </a>
+
+
+        <a href="#levels"
+           class="p-5 text-center
+                  hover:bg-emerald-50
+                  dark:hover:bg-slate-800
+                  transition border-l border-slate-200
+                  dark:border-slate-800">
+
+            <i class="fa-solid fa-school
+                     text-brandGreen text-2xl"></i>
+
+            <p class="font-bold text-sm mt-2">
+                الأطوار التعليمية
+            </p>
+
+        </a>
+
+
+        <a href="#courses"
+           class="p-5 text-center
+                  hover:bg-blue-50
+                  dark:hover:bg-slate-800
+                  transition border-l border-slate-200
+                  dark:border-slate-800">
+
+            <i class="fa-solid fa-book-open-reader
+                     text-blue-600 text-2xl"></i>
+
+            <p class="font-bold text-sm mt-2">
+                الدعم والدورات
+            </p>
+
+        </a>
+
+
+        <a href="#register"
+           class="p-5 text-center
+                  hover:bg-yellow-50
+                  dark:hover:bg-slate-800
+                  transition">
+
+            <i class="fa-solid fa-file-signature
+                     text-brandGold text-2xl"></i>
+
+            <p class="font-bold text-sm mt-2">
+                التسجيل
+            </p>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ANNOUNCEMENTS
+========================================================= -->
+
+<section class="py-16 px-4">
+
+    <div class="max-w-7xl mx-auto">
+
+        <div class="flex flex-col md:flex-row
+                    md:items-center
+                    justify-between gap-4 mb-8">
+
+            <div>
+
+                <span class="text-brandGreen
+                             dark:text-emerald-400
+                             font-bold text-xs">
+
+                    <i class="fa-solid fa-bullhorn"></i>
+                    آخر المستجدات
+
+                </span>
+
+                <h2 class="text-2xl md:text-3xl
+                           font-black mt-2 text-dark">
+
+                    إعلانات مدرسة ماري
+
+                </h2>
+
             </div>
 
-            <div class="space-y-4">
-                <div class="border border-gray-200 rounded-2xl overflow-hidden shadow-sm bg-white">
-                    <button class="w-full p-4.5 text-right font-bold text-slate-800 bg-slate-50/80 flex justify-between items-center focus:outline-none hover:bg-slate-100 transition" onclick="toggleFaq(1)">
-                        <span>كيف يمكنني التواصل مع إدارة المدرسة الخاصة بالنساء أو الرجال؟</span>
-                        <i id="faq-icon-1" class="fa-solid fa-chevron-down text-gray-500 transition-transform"></i>
-                    </button>
-                    <div id="faq-ans-1" class="hidden p-5 text-sm text-gray-600 bg-white border-t border-gray-100 leading-relaxed">
-                        خصصنا خطوطاً هاتفية منفصلة لضمان أقصى أريحية وسرعة في الإجابة: رقم خاص بقسم النساء (<span dir="ltr">0699 85 41 92</span>)، ورقم خاص بالرجال والواتساب (<span dir="ltr">0673 34 71 37</span>)، بالإضافة إلى الرقم العام للمدرسة (<span dir="ltr">0699 18 19 93</span>).
-                    </div>
-                </div>
+            <span class="text-xs text-slate-500">
+                تابع هذه المساحة لمعرفة جديد التسجيل والبرامج
+            </span>
 
-                <div class="border border-gray-200 rounded-2xl overflow-hidden shadow-sm bg-white">
-                    <button class="w-full p-4.5 text-right font-bold text-slate-800 bg-slate-50/80 flex justify-between items-center focus:outline-none hover:bg-slate-100 transition" onclick="toggleFaq(2)">
-                        <span>ما هي أوقات العمل وتسجيل الأطفال في الروضة؟</span>
-                        <i id="faq-icon-2" class="fa-solid fa-chevron-down text-gray-500 transition-transform"></i>
-                    </button>
-                    <div id="faq-ans-2" class="hidden p-5 text-sm text-gray-600 bg-white border-t border-gray-100 leading-relaxed">
-                        تستقبل روضة وحضانة عدنان ولينا الأطفال طيلة أيام الأسبوع ببرامج مرنة ومدروسة تناسب أوقات الأولياء، ويمكنكم التسجيل مباشرة في مقر المدرسة الكائن بحي بن الزين - الحجيرة.
-                    </div>
-                </div>
-
-                <div class="border border-gray-200 rounded-2xl overflow-hidden shadow-sm bg-white">
-                    <button class="w-full p-4.5 text-right font-bold text-slate-800 bg-slate-50/80 flex justify-between items-center focus:outline-none hover:bg-slate-100 transition" onclick="toggleFaq(3)">
-                        <span>هل توفر المدرسة تحضيراً خاصاً لامتحانات الشهادات (BAC / BEM)؟</span>
-                        <i id="faq-icon-3" class="fa-solid fa-chevron-down text-gray-500 transition-transform"></i>
-                    </button>
-                    <div id="faq-ans-3" class="hidden p-5 text-sm text-gray-600 bg-white border-t border-gray-100 leading-relaxed">
-                        نعم، نوفر دورات دعم مكثفة ومتابعة فردية دقيقة تحت إشراف نخبة من أساتذة المواد الأساسية، مع تدريبات مستمرة على المنهجية الرسمية للامتحانات لضمان تفوق التلاميذ.
-                    </div>
-                </div>
-            </div>
         </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 px-4 bg-white border-t border-gray-200">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-brandGreen font-bold text-sm bg-emerald-100 px-3.5 py-1 rounded-full">نحن في خدمتكم</span>
-                <h2 class="text-3xl font-extrabold text-slate-800 mt-2">تواصل معنا والأرقام المخصصة</h2>
-                <p class="text-gray-600 mt-2">يمكنكم زيارتنا في المقر أو التواصل معنا مباشرة عبر الأرقام المخصصة للرجال، النساء، أو الرقم العام</p>
-            </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-slate-50 p-6 rounded-2xl shadow-sm text-center border border-gray-200 flex flex-col justify-between hover:shadow-md transition">
-                    <div>
-                        <div class="w-12 h-12 bg-emerald-100 text-brandGreen rounded-full flex items-center justify-center mx-auto text-xl mb-4 shadow-sm">
-                            <i class="fa-solid fa-location-dot"></i>
-                        </div>
-                        <h3 class="font-bold text-lg text-slate-800">العنوان</h3>
-                        <p class="text-sm text-gray-600 mt-2">حي بن الزين، الحجيرة<br>ولاية توقرت - الجزائر</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-gray-200">
-                        <a href="#location" class="text-xs text-brandGreen font-bold hover:underline">عرض على الخريطة ←</a>
-                    </div>
-                </div>
+        <div class="grid md:grid-cols-3 gap-5">
 
-                <div class="bg-slate-50 p-6 rounded-2xl shadow-sm text-center border border-gray-200 flex flex-col justify-between hover:shadow-md transition">
-                    <div>
-                        <div class="w-12 h-12 bg-emerald-100 text-brandGreen rounded-full flex items-center justify-center mx-auto text-xl mb-4 shadow-sm">
-                            <i class="fa-solid fa-phone-volume"></i>
-                        </div>
-                        <h3 class="font-bold text-lg text-slate-800">الرقم العام</h3>
-                        <p class="text-sm text-gray-700 font-bold mt-2" dir="ltr">0699 18 19 93</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-gray-200">
-                        <a href="tel:+213699181993" class="text-xs text-brandGreen font-bold hover:underline">اتصال مباشر ←</a>
-                    </div>
-                </div>
+            <article class="card-light
+                            bg-white dark:bg-slate-900
+                            border border-slate-200
+                            dark:border-slate-800
+                            rounded-3xl p-6 shadow-sm
+                            reveal">
 
-                <div class="bg-slate-50 p-6 rounded-2xl shadow-sm text-center border border-gray-200 flex flex-col justify-between hover:shadow-md transition">
-                    <div>
-                        <div class="w-12 h-12 bg-pink-100 text-pink-700 rounded-full flex items-center justify-center mx-auto text-xl mb-4 shadow-sm">
-                            <i class="fa-solid fa-person-dress"></i>
-                        </div>
-                        <h3 class="font-bold text-lg text-slate-800">قسم النساء</h3>
-                        <p class="text-sm text-gray-700 font-bold mt-2" dir="ltr">0699 85 41 92</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-gray-200">
-                        <a href="tel:+213699854192" class="text-xs text-pink-700 font-bold hover:underline">اتصال بالنساء ←</a>
-                    </div>
-                </div>
+                <span class="inline-flex
+                             bg-emerald-100 text-emerald-800
+                             dark:bg-emerald-950
+                             dark:text-emerald-300
+                             px-3 py-1 rounded-full
+                             text-xs font-bold">
 
-                <div class="bg-slate-50 p-6 rounded-2xl shadow-sm text-center border border-gray-200 flex flex-col justify-between hover:shadow-md transition">
-                    <div>
-                        <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center mx-auto text-xl mb-4 shadow-sm">
-                            <i class="fa-solid fa-person"></i>
-                        </div>
-                        <h3 class="font-bold text-lg text-slate-800">قسم الرجال / واتساب</h3>
-                        <p class="text-sm text-gray-700 font-bold mt-2" dir="ltr">0673 34 71 37</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-gray-200">
-                        <a href="https://wa.me/213673347137" target="_blank" class="text-xs text-emerald-600 font-bold hover:underline">راسل عبر واتساب ←</a>
-                    </div>
-                </div>
-            </div>
+                    التسجيل
+
+                </span>
+
+                <h3 class="font-black text-lg mt-4 text-dark">
+                    التسجيل الأولي متاح إلكترونيًا
+                </h3>
+
+                <p class="text-sm text-muted mt-2 leading-7">
+                    يمكنكم إرسال معلومات التلميذ والطور المطلوب
+                    مباشرة إلى الإدارة عبر WhatsApp.
+                </p>
+
+                <a href="#register"
+                   class="inline-block mt-4
+                          text-brandGreen
+                          dark:text-emerald-400
+                          text-sm font-bold">
+
+                    ابدأ التسجيل ←
+
+                </a>
+
+            </article>
+
+
+            <article class="card-light
+                            bg-white dark:bg-slate-900
+                            border border-slate-200
+                            dark:border-slate-800
+                            rounded-3xl p-6 shadow-sm
+                            reveal">
+
+                <span class="inline-flex
+                             bg-amber-100 text-amber-800
+                             dark:bg-amber-950
+                             dark:text-amber-300
+                             px-3 py-1 rounded-full
+                             text-xs font-bold">
+
+                    الروضة
+
+                </span>
+
+                <h3 class="font-black text-lg mt-4 text-dark">
+                    روضة وحضانة عدنان ولينا
+                </h3>
+
+                <p class="text-sm text-muted mt-2 leading-7">
+                    برامج رعاية وتأسيس وأنشطة تعليمية وترفيهية
+                    مناسبة للطفولة المبكرة.
+                </p>
+
+                <a href="#nursery"
+                   class="inline-block mt-4
+                          text-brandGreen
+                          dark:text-emerald-400
+                          text-sm font-bold">
+
+                    اكتشف الروضة ←
+
+                </a>
+
+            </article>
+
+
+            <article class="card-light
+                            bg-white dark:bg-slate-900
+                            border border-slate-200
+                            dark:border-slate-800
+                            rounded-3xl p-6 shadow-sm
+                            reveal">
+
+                <span class="inline-flex
+                             bg-blue-100 text-blue-800
+                             dark:bg-blue-950
+                             dark:text-blue-300
+                             px-3 py-1 rounded-full
+                             text-xs font-bold">
+
+                    الدعم
+
+                </span>
+
+                <h3 class="font-black text-lg mt-4 text-dark">
+                    دورات ودروس دعم
+                </h3>
+
+                <p class="text-sm text-muted mt-2 leading-7">
+                    برامج مراجعة وتأسيس وتحضير حسب المواد
+                    والمستويات المتاحة.
+                </p>
+
+                <a href="#courses"
+                   class="inline-block mt-4
+                          text-brandGreen
+                          dark:text-emerald-400
+                          text-sm font-bold">
+
+                    تعرف على البرامج ←
+
+                </a>
+
+            </article>
+
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 text-gray-400 py-10 px-4 text-sm">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 border-b border-gray-800 pb-8">
-            <div class="flex items-center gap-3">
-                <div class="bg-brandGold text-slate-950 w-10 h-10 rounded-xl flex items-center justify-center text-xl font-extrabold shadow-md">
-                    M
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     NURSERY
+========================================================= -->
+
+<section id="nursery"
+         class="py-20 px-4 bg-amber-50/70
+                dark:bg-slate-900/60">
+
+    <div class="max-w-7xl mx-auto">
+
+        <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+
+            <span class="text-amber-700
+                         dark:text-amber-400
+                         font-bold text-sm
+                         bg-amber-100 dark:bg-amber-950
+                         px-4 py-1.5 rounded-full">
+
+                الطفولة المبكرة
+
+            </span>
+
+            <h2 class="text-3xl md:text-4xl
+                       font-black mt-4 text-dark">
+
+                روضة وحضانة عدنان ولينا
+
+            </h2>
+
+            <p class="text-muted mt-3 leading-7">
+                بيئة آمنة ومحفزة تمنح الأطفال الرعاية
+                والتأسيس والأنشطة المناسبة لأعمارهم.
+            </p>
+
+        </div>
+
+
+        <div class="grid lg:grid-cols-3 gap-6">
+
+            <div class="space-y-5 reveal">
+
+                <div class="card-light bg-white dark:bg-slate-900
+                            border border-amber-100
+                            dark:border-slate-800
+                            rounded-3xl p-6">
+
+                    <div class="flex gap-4">
+
+                        <div class="w-12 h-12 shrink-0
+                                    rounded-2xl bg-amber-100
+                                    text-amber-700
+                                    flex items-center justify-center
+                                    text-xl">
+
+                            <i class="fa-solid fa-shield-heart"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-black text-lg text-dark">
+                                أمان ورعاية
+                            </h3>
+
+                            <p class="text-sm text-muted mt-1 leading-6">
+                                متابعة مستمرة وبيئة مناسبة للأطفال.
+                            </p>
+
+                        </div>
+
+                    </div>
+
                 </div>
+
+
+                <div class="card-light bg-white dark:bg-slate-900
+                            border border-amber-100
+                            dark:border-slate-800
+                            rounded-3xl p-6">
+
+                    <div class="flex gap-4">
+
+                        <div class="w-12 h-12 shrink-0
+                                    rounded-2xl bg-amber-100
+                                    text-amber-700
+                                    flex items-center justify-center
+                                    text-xl">
+
+                            <i class="fa-solid fa-shapes"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-black text-lg text-dark">
+                                أنشطة تفاعلية
+                            </h3>
+
+                            <p class="text-sm text-muted mt-1 leading-6">
+                                الرسم، الألعاب، الأنشطة الذهنية
+                                والتواصل الاجتماعي.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="bg-gradient-to-br
+                        from-amber-100 to-amber-200
+                        dark:from-amber-950 dark:to-slate-900
+                        rounded-[2rem]
+                        p-10 text-center
+                        flex flex-col justify-center
+                        border border-amber-200
+                        dark:border-amber-900
+                        shadow-soft reveal">
+
+                <div class="text-6xl">
+                    🧸🎨🎈
+                </div>
+
+                <h3 class="text-2xl font-black mt-5 text-dark">
+                    عالم آمن وممتع
+                </h3>
+
+                <p class="text-sm text-muted mt-3 leading-7">
+                    نهتم ببناء أساس جيد للطفل مع أنشطة
+                    تعليمية وترفيهية مناسبة.
+                </p>
+
+                <a href="tel:+213699854192"
+                   class="mt-6 inline-flex
+                          justify-center items-center gap-2
+                          bg-pink-600 hover:bg-pink-700
+                          text-white px-5 py-3
+                          rounded-xl font-bold text-sm">
+
+                    <i class="fa-solid fa-phone"></i>
+                    استفسار الروضة
+
+                </a>
+
+            </div>
+
+
+            <div class="space-y-5 reveal">
+
+                <div class="card-light bg-white dark:bg-slate-900
+                            border border-amber-100
+                            dark:border-slate-800
+                            rounded-3xl p-6">
+
+                    <div class="flex gap-4">
+
+                        <div class="w-12 h-12 shrink-0
+                                    rounded-2xl bg-amber-100
+                                    text-amber-700
+                                    flex items-center justify-center
+                                    text-xl">
+
+                            <i class="fa-solid fa-brain"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-black text-lg text-dark">
+                                تأسيس لغوي وذهني
+                            </h3>
+
+                            <p class="text-sm text-muted mt-1 leading-6">
+                                تهيئة الطفل للانتقال السلس
+                                إلى التعليم الابتدائي.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-light bg-white dark:bg-slate-900
+                            border border-amber-100
+                            dark:border-slate-800
+                            rounded-3xl p-6">
+
+                    <div class="flex gap-4">
+
+                        <div class="w-12 h-12 shrink-0
+                                    rounded-2xl bg-amber-100
+                                    text-amber-700
+                                    flex items-center justify-center
+                                    text-xl">
+
+                            <i class="fa-solid fa-clock"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-black text-lg text-dark">
+                                برامج مرنة
+                            </h3>
+
+                            <p class="text-sm text-muted mt-1 leading-6">
+                                تنظيم يناسب احتياجات الأولياء
+                                حسب البرامج المتاحة.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     LEVELS
+========================================================= -->
+
+<section id="levels"
+         class="py-20 px-4 bg-white
+                dark:bg-slate-950">
+
+    <div class="max-w-7xl mx-auto">
+
+        <div class="text-center max-w-3xl mx-auto mb-10 reveal">
+
+            <span class="text-brandGreen
+                         dark:text-emerald-400
+                         font-bold text-sm
+                         bg-emerald-50 dark:bg-emerald-950
+                         px-4 py-1.5 rounded-full">
+
+                البرامج التعليمية
+
+            </span>
+
+            <h2 class="text-3xl md:text-4xl
+                       font-black mt-4 text-dark">
+
+                الأطوار والمواد المتاحة
+
+            </h2>
+
+            <p class="text-muted mt-3 leading-7">
+                اختر الطور أو ابحث عن المادة لمعرفة البرامج
+                المتاحة وحالة التسجيل.
+            </p>
+
+        </div>
+
+
+        <!-- Search -->
+
+        <div class="max-w-xl mx-auto mb-10">
+
+            <div class="relative">
+
+                <i class="fa-solid fa-magnifying-glass
+                         absolute right-4 top-1/2
+                         -translate-y-1/2
+                         text-slate-400"></i>
+
+                <input id="courseSearch"
+                       type="search"
+                       placeholder="ابحث عن مادة أو طور..."
+                       class="w-full
+                              pr-11 pl-4 py-4
+                              rounded-2xl
+                              border border-slate-200
+                              dark:border-slate-700
+                              bg-slate-50
+                              dark:bg-slate-900
+                              text-dark
+                              outline-none
+                              focus:ring-2
+                              focus:ring-brandGreen">
+
+            </div>
+
+        </div>
+
+
+        <div id="courseGrid"
+             class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+
+            <!-- PRIMARY -->
+
+            <article class="course-card card-light
+                            bg-slate-50 dark:bg-slate-900
+                            border border-slate-200
+                            dark:border-slate-800
+                            rounded-3xl p-7
+                            flex flex-col
+                            reveal"
+                     data-search="ابتدائي عربية رياضيات فرنسية">
+
+                <div class="flex items-start justify-between gap-3">
+
+                    <div class="w-14 h-14
+                                rounded-2xl
+                                bg-emerald-100
+                                dark:bg-emerald-950
+                                text-brandGreen
+                                dark:text-emerald-400
+                                flex items-center justify-center
+                                text-2xl">
+
+                        <i class="fa-solid fa-pen-ruler"></i>
+
+                    </div>
+
+                    <span class="status-badge
+                                 bg-emerald-100
+                                 text-emerald-800
+                                 dark:bg-emerald-950
+                                 dark:text-emerald-300">
+
+                        <span class="status-dot w-2 h-2
+                                     rounded-full bg-emerald-500"></span>
+
+                        التسجيل مفتوح
+
+                    </span>
+
+                </div>
+
+
+                <h3 class="text-xl font-black mt-5 text-dark">
+                    التعليم الابتدائي
+                </h3>
+
+                <p class="text-xs text-muted mt-1">
+                    تأسيس ومعالجة النقائص
+                </p>
+
+
+                <div class="mt-5">
+
+                    <p class="text-xs font-bold text-dark mb-2">
+                        المواد والبرامج
+                    </p>
+
+                    <div class="space-y-2">
+
+                        <div class="subject unavailable">
+                            اللغة العربية
+                            <span>غير متاح حاليًا</span>
+                        </div>
+
+                        <div class="subject unavailable">
+                            الرياضيات
+                            <span>غير متاح حاليًا</span>
+                        </div>
+
+                        <div class="subject unavailable">
+                            اللغة الفرنسية
+                            <span>غير متاح حاليًا</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button onclick="openRegistrationModal('الطور الابتدائي')"
+                        class="mt-6 w-full
+                               bg-brandGreen hover:bg-brandLightGreen
+                               text-white py-3
+                               rounded-xl font-bold text-sm">
+
+                    طلب التسجيل والاستفسار
+
+                </button>
+
+            </article>
+
+
+            <!-- MIDDLE -->
+
+            <article class="course-card card-light
+                            bg-slate-50 dark:bg-slate-900
+                            border border-slate-200
+                            dark:border-slate-800
+                            rounded-3xl p-7
+                            flex flex-col
+                            reveal"
+                     data-search="متوسط BEM رياضيات فيزياء علوم انجليزي فرنسي">
+
+                <div class="flex items-start justify-between gap-3">
+
+                    <div class="w-14 h-14
+                                rounded-2xl
+                                bg-blue-100
+                                dark:bg-blue-950
+                                text-blue-700
+                                dark:text-blue-400
+                                flex items-center justify-center
+                                text-2xl">
+
+                        <i class="fa-solid fa-laptop-code"></i>
+
+                    </div>
+
+                    <span class="status-badge
+                                 bg-emerald-100
+                                 text-emerald-800
+                                 dark:bg-emerald-950
+                                 dark:text-emerald-300">
+
+                        <span class="status-dot w-2 h-2
+                                     rounded-full bg-emerald-500"></span>
+
+                        التسجيل مفتوح
+
+                    </span>
+
+                </div>
+
+
+                <h3 class="text-xl font-black mt-5 text-dark">
+                    التعليم المتوسط
+                </h3>
+
+                <p class="text-xs text-muted mt-1">
+                    التحضير لشهادة التعليم المتوسط BEM
+                </p>
+
+
+                <div class="mt-5">
+
+                    <p class="text-xs font-bold text-dark mb-2">
+                        المواد والبرامج
+                    </p>
+
+                    <div class="space-y-2">
+
+                        <div class="subject unavailable">
+                            الرياضيات
+                            <span>غير متاح حاليًا</span>
+                        </div>
+
+                        <div class="subject unavailable">
+                            الفيزياء والعلوم
+                            <span>غير متاح حاليًا</span>
+                        </div>
+
+                        <div class="subject unavailable">
+                            اللغات
+                            <span>غير متاح حاليًا</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button onclick="openRegistrationModal('الطور المتوسط')"
+                        class="mt-6 w-full
+                               bg-blue-700 hover:bg-blue-800
+                               text-white py-3
+                               rounded-xl font-bold text-sm">
+
+                    طلب التسجيل والاستفسار
+
+                </button>
+
+            </article>
+
+
+            <!-- SECONDARY -->
+
+            <article class="course-card card-light
+                            bg-slate-50 dark:bg-slate-900
+                            border border-slate-200
+                            dark:border-slate-800
+                            rounded-3xl p-7
+                            flex flex-col
+                            reveal"
+                     data-search="ثانوي BAC بكالوريا رياضيات علوم فيزياء">
+
+                <div class="flex items-start justify-between gap-3">
+
+                    <div class="w-14 h-14
+                                rounded-2xl
+                                bg-amber-100
+                                dark:bg-amber-950
+                                text-amber-700
+                                dark:text-amber-400
+                                flex items-center justify-center
+                                text-2xl">
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                    </div>
+
+                    <span class="status-badge
+                                 bg-emerald-100
+                                 text-emerald-800
+                                 dark:bg-emerald-950
+                                 dark:text-emerald-300">
+
+                        <span class="status-dot w-2 h-2
+                                     rounded-full bg-emerald-500"></span>
+
+                        التسجيل مفتوح
+
+                    </span>
+
+                </div>
+
+
+                <h3 class="text-xl font-black mt-5 text-dark">
+                    التعليم الثانوي والشهادات
+                </h3>
+
+                <p class="text-xs text-muted mt-1">
+                    التحضير المكثف للبكالوريا BAC
+                </p>
+
+
+                <div class="mt-5">
+
+                    <p class="text-xs font-bold text-dark mb-2">
+                        المواد والبرامج
+                    </p>
+
+                    <div class="space-y-2">
+
+                        <div class="subject unavailable">
+                            الرياضيات - نهائي
+                            <span>غير متاح حاليًا</span>
+                        </div>
+
+                        <div class="subject unavailable">
+                            علوم الطبيعة
+                            <span>غير متاح حاليًا</span>
+                        </div>
+
+                        <div class="subject waiting">
+                            الفيزياء
+                            <span>قائمة الانتظار</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button onclick="openRegistrationModal('الطور الثانوي والتحضير للبكالوريا')"
+                        class="mt-6 w-full
+                               bg-amber-600 hover:bg-amber-700
+                               text-white py-3
+                               rounded-xl font-bold text-sm">
+
+                    طلب التسجيل والاستفسار
+
+                </button>
+
+            </article>
+
+        </div>
+
+
+        <div id="noCourses"
+             class="hidden text-center py-12 text-slate-500">
+
+            <i class="fa-solid fa-magnifying-glass
+                     text-3xl mb-3"></i>
+
+            <p class="font-bold">
+                لم يتم العثور على نتيجة مطابقة.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     COURSES
+========================================================= -->
+
+<section id="courses"
+         class="py-20 px-4
+                bg-slate-900 text-white">
+
+    <div class="max-w-7xl mx-auto">
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+            <div class="reveal">
+
+                <span class="inline-flex
+                             bg-brandGold/10
+                             text-brandGold
+                             border border-brandGold/20
+                             px-4 py-1.5
+                             rounded-full
+                             text-sm font-bold">
+
+                    أنشطة وتكوين مستمر
+
+                </span>
+
+                <h2 class="text-3xl md:text-4xl
+                           font-black mt-5 leading-tight">
+
+                    الدورات التكوينية
+                    ودروس الدعم المكثفة
+
+                </h2>
+
+                <p class="text-slate-300 mt-5 leading-8">
+
+                    برامج مراجعة وتشخيص وتأسيس تساعد
+                    التلميذ على استدراك النقائص والاستعداد
+                    بشكل أفضل للموسم الدراسي والاختبارات.
+
+                </p>
+
+
+                <div class="mt-7 space-y-4">
+
+                    <div class="flex gap-3">
+
+                        <i class="fa-solid fa-circle-check
+                                 text-brandGold mt-1"></i>
+
+                        <span class="text-sm text-slate-300">
+                            مراجعة وتشخيص المكتسبات القبلية.
+                        </span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <i class="fa-solid fa-circle-check
+                                 text-brandGold mt-1"></i>
+
+                        <span class="text-sm text-slate-300">
+                            مجموعات مناسبة لضمان التركيز.
+                        </span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <i class="fa-solid fa-circle-check
+                                 text-brandGold mt-1"></i>
+
+                        <span class="text-sm text-slate-300">
+                            متابعة وتقييم حسب البرنامج.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="bg-brandGreen/30
+                        border border-brandGreen
+                        rounded-[2rem]
+                        p-8 md:p-10
+                        text-center shadow-glow
+                        reveal">
+
+                <div class="w-16 h-16 mx-auto
+                            rounded-2xl
+                            bg-brandGold
+                            text-slate-950
+                            flex items-center justify-center
+                            text-2xl">
+
+                    <i class="fa-solid fa-calendar-check"></i>
+
+                </div>
+
+                <h3 class="text-2xl font-black mt-5">
+                    هل تريد معرفة البرنامج المتاح؟
+                </h3>
+
+                <p class="text-sm text-slate-300
+                          leading-7 mt-3">
+
+                    تواصل مع الإدارة لمعرفة المواد،
+                    المواعيد، والبرامج المتوفرة حاليًا.
+
+                </p>
+
+
+                <div class="grid sm:grid-cols-2 gap-3 mt-6">
+
+                    <a href="tel:+213673347137"
+                       class="bg-brandGold
+                              text-slate-950
+                              rounded-xl py-3
+                              font-black text-sm">
+
+                        <i class="fa-solid fa-person"></i>
+                        الرجال
+
+                    </a>
+
+                    <a href="tel:+213699854192"
+                       class="bg-pink-600
+                              text-white
+                              rounded-xl py-3
+                              font-black text-sm">
+
+                        <i class="fa-solid fa-person-dress"></i>
+                        النساء
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     GALLERY
+========================================================= -->
+
+<section id="gallery"
+         class="py-20 px-4
+                bg-slate-50 dark:bg-slate-900">
+
+    <div class="max-w-7xl mx-auto">
+
+        <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+
+            <span class="text-brandGreen
+                         dark:text-emerald-400
+                         font-bold text-sm">
+
+                من أجواء المدرسة
+
+            </span>
+
+            <h2 class="text-3xl md:text-4xl
+                       font-black mt-3 text-dark">
+
+                معرض مدرسة ماري
+
+            </h2>
+
+            <p class="text-muted mt-3">
+                يمكن استبدال هذه المساحات لاحقًا بصور المدرسة
+                والروضة والأنشطة الحقيقية.
+            </p>
+
+        </div>
+
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+            <div class="gallery-placeholder reveal">
+                <i class="fa-solid fa-school"></i>
+                <span>مرافق المدرسة</span>
+            </div>
+
+            <div class="gallery-placeholder reveal">
+                <i class="fa-solid fa-child"></i>
+                <span>أنشطة الروضة</span>
+            </div>
+
+            <div class="gallery-placeholder reveal">
+                <i class="fa-solid fa-book-open"></i>
+                <span>الدروس</span>
+            </div>
+
+            <div class="gallery-placeholder reveal">
+                <i class="fa-solid fa-palette"></i>
+                <span>الأنشطة</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     REGISTRATION
+========================================================= -->
+
+<section id="register"
+         class="py-20 px-4
+                bg-emerald-50/60
+                dark:bg-emerald-950/20">
+
+    <div class="max-w-4xl mx-auto">
+
+        <div class="text-center mb-10 reveal">
+
+            <span class="text-brandGreen
+                         dark:text-emerald-400
+                         font-bold text-sm
+                         bg-emerald-100
+                         dark:bg-emerald-950
+                         px-4 py-1.5 rounded-full">
+
+                خدمة إلكترونية
+
+            </span>
+
+            <h2 class="text-3xl md:text-4xl
+                       font-black mt-4 text-dark">
+
+                التسجيل الأولي
+
+            </h2>
+
+            <p class="text-muted mt-3">
+                أرسل معلوماتك الأساسية وسنفتح لك WhatsApp
+                لإرسال الطلب إلى الإدارة.
+            </p>
+
+        </div>
+
+
+        <div class="card-light bg-white dark:bg-slate-900
+                    rounded-[2rem]
+                    border border-emerald-100
+                    dark:border-slate-800
+                    shadow-soft p-6 md:p-10 reveal">
+
+            <form id="registrationForm"
+                  class="space-y-5">
+
+                <div class="grid md:grid-cols-2 gap-5">
+
+                    <div>
+                        <label class="form-label">
+                            اسم ولقب الولي
+                        </label>
+
+                        <input name="guardianName"
+                               required
+                               type="text"
+                               autocomplete="name"
+                               placeholder="مثال: محمد بن علي"
+                               class="form-input">
+
+                    </div>
+
+
+                    <div>
+                        <label class="form-label">
+                            اسم ولقب التلميذ
+                        </label>
+
+                        <input name="studentName"
+                               required
+                               type="text"
+                               placeholder="مثال: أحمد بن علي"
+                               class="form-input">
+
+                    </div>
+
+                </div>
+
+
+                <div class="grid md:grid-cols-2 gap-5">
+
+                    <div>
+                        <label class="form-label">
+                            الطور التعليمي
+                        </label>
+
+                        <select name="level"
+                                id="mainLevel"
+                                required
+                                class="form-input">
+
+                            <option value="">
+                                اختر الطور...
+                            </option>
+
+                            <option>
+                                روضة وحضانة عدنان ولينا
+                            </option>
+
+                            <option>
+                                الطور الابتدائي
+                            </option>
+
+                            <option>
+                                الطور المتوسط
+                            </option>
+
+                            <option>
+                                الطور الثانوي والتحضير للبكالوريا
+                            </option>
+
+                            <option>
+                                دورات تكوينية ودعم مكثف
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label class="form-label">
+                            رقم الهاتف
+                        </label>
+
+                        <input name="phone"
+                               id="phoneInput"
+                               required
+                               type="tel"
+                               inputmode="tel"
+                               dir="ltr"
+                               placeholder="06XXXXXXXX"
+                               class="form-input">
+
+                        <p id="phoneError"
+                           class="hidden text-xs text-red-600 mt-1">
+                            يرجى إدخال رقم هاتف جزائري صحيح.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
                 <div>
-                    <h3 class="text-white font-bold text-base">مدرسة وروضة ماري</h3>
-                    <p class="text-xs text-gray-400">حي بن الزين، الحجيرة، توقرت</p>
+
+                    <label class="form-label">
+                        المادة المطلوبة
+                    </label>
+
+                    <select name="subject"
+                            class="form-input">
+
+                        <option value="">
+                            اختر المادة إن وجدت...
+                        </option>
+
+                        <option>اللغة العربية</option>
+                        <option>الرياضيات</option>
+                        <option>اللغة الفرنسية</option>
+                        <option>اللغة الإنجليزية</option>
+                        <option>الفيزياء</option>
+                        <option>علوم الطبيعة</option>
+                        <option>دروس دعم عامة</option>
+                        <option>الروضة والحضانة</option>
+
+                    </select>
+
                 </div>
-            </div>
-            <div class="flex flex-wrap justify-center gap-6 text-xs font-semibold">
-                <a href="#home" class="hover:text-white transition">الرئيسية</a>
-                <a href="#nursery" class="hover:text-white transition">الروضة</a>
-                <a href="#levels" class="hover:text-white transition">الأطوار</a>
-                <a href="#location" class="hover:text-white transition">موقعنا</a>
-                <a href="#contact" class="hover:text-white transition">اتصل بنا</a>
-            </div>
+
+
+                <div>
+
+                    <label class="form-label">
+                        ملاحظات أو استفسار
+                    </label>
+
+                    <textarea name="notes"
+                              rows="4"
+                              placeholder="اكتب أي ملاحظات أو معلومات إضافية..."
+                              class="form-input resize-none"></textarea>
+
+                </div>
+
+
+                <div class="bg-slate-50
+                            dark:bg-slate-800/70
+                            rounded-2xl p-4
+                            text-xs text-muted
+                            leading-6">
+
+                    <i class="fa-solid fa-circle-info
+                             text-brandGreen
+                             dark:text-emerald-400 ml-1"></i>
+
+                    هذا الطلب هو تسجيل أولي فقط، ولا يُعتبر
+                    قبولًا نهائيًا حتى تؤكد الإدارة التسجيل
+                    وتوفر البرنامج المطلوب.
+
+                </div>
+
+
+                <button type="submit"
+                        class="w-full
+                               bg-brandGreen
+                               hover:bg-brandLightGreen
+                               text-white
+                               rounded-2xl py-4
+                               font-black
+                               shadow-lg
+                               transition">
+
+                    <i class="fa-brands fa-whatsapp text-xl ml-2"></i>
+
+                    إرسال الطلب عبر WhatsApp
+
+                </button>
+
+            </form>
+
         </div>
-        <div class="max-w-7xl mx-auto pt-6 text-center text-xs text-gray-500">
-            جميع الحقوق محفوظة © 2026 مدرسة ماري (Mary School) - الحجيرة، توقرت.
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     LOCATION
+========================================================= -->
+
+<section id="location"
+         class="py-20 px-4 bg-white
+                dark:bg-slate-950">
+
+    <div class="max-w-7xl mx-auto">
+
+        <div class="text-center mb-12 reveal">
+
+            <span class="text-brandGreen
+                         dark:text-emerald-400
+                         font-bold text-sm">
+
+                الوصول إلينا
+
+            </span>
+
+            <h2 class="text-3xl md:text-4xl
+                       font-black mt-3 text-dark">
+
+                موقع مدرسة ماري
+
+            </h2>
+
+            <p class="text-muted mt-3">
+                حي بن الزين، بلدية الحجيرة، ولاية توقرت، الجزائر.
+            </p>
+
         </div>
-    </footer>
 
-    <!-- JavaScript Scripts -->
-    <script>
-        // Toggle Mobile Menu
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
 
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        <div class="grid lg:grid-cols-3 gap-6">
 
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            <div class="lg:col-span-1 space-y-5 reveal">
+
+                <div class="card-light bg-slate-50
+                            dark:bg-slate-900
+                            border border-slate-200
+                            dark:border-slate-800
+                            rounded-3xl p-6">
+
+                    <div class="flex gap-4">
+
+                        <div class="w-12 h-12 shrink-0
+                                    bg-emerald-100
+                                    dark:bg-emerald-950
+                                    text-brandGreen
+                                    dark:text-emerald-400
+                                    rounded-2xl
+                                    flex items-center justify-center">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-black text-dark">
+                                العنوان
+                            </h3>
+
+                            <p class="text-sm text-muted mt-1 leading-6">
+                                حي بن الزين، الحجيرة،
+                                ولاية توقرت، الجزائر.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-light bg-slate-50
+                            dark:bg-slate-900
+                            border border-slate-200
+                            dark:border-slate-800
+                            rounded-3xl p-6">
+
+                    <div class="flex gap-4">
+
+                        <div class="w-12 h-12 shrink-0
+                                    bg-emerald-100
+                                    dark:bg-emerald-950
+                                    text-brandGreen
+                                    dark:text-emerald-400
+                                    rounded-2xl
+                                    flex items-center justify-center">
+
+                            <i class="fa-solid fa-phone"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-black text-dark">
+                                الرقم العام
+                            </h3>
+
+                            <a href="tel:+213699181993"
+                               dir="ltr"
+                               class="block text-sm font-bold
+                                      text-brandGreen
+                                      dark:text-emerald-400
+                                      mt-1">
+
+                                0699 18 19 93
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <a href="https://www.google.com/maps/search/?api=1&query=32.6170966,5.5151436"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="block w-full
+                          bg-brandGreen
+                          hover:bg-brandLightGreen
+                          text-white
+                          text-center
+                          rounded-2xl py-4
+                          font-black transition">
+
+                    <i class="fa-solid fa-map-location-dot ml-2"></i>
+
+                    فتح الموقع على Google Maps
+
+                </a>
+
+            </div>
+
+
+            <div class="lg:col-span-2
+                        min-h-[380px]
+                        rounded-[2rem]
+                        overflow-hidden
+                        bg-gradient-to-br
+                        from-emerald-950
+                        to-brandGreen
+                        text-white
+                        flex items-center
+                        justify-center
+                        text-center
+                        p-10
+                        relative reveal">
+
+                <div class="absolute
+                            -top-16 -right-16
+                            text-[180px]
+                            opacity-5">
+
+                    <i class="fa-solid fa-map"></i>
+
+                </div>
+
+                <div class="relative">
+
+                    <div class="w-20 h-20 mx-auto
+                                rounded-full
+                                bg-brandGold
+                                text-slate-950
+                                flex items-center
+                                justify-center
+                                text-3xl shadow-lg">
+
+                        <i class="fa-solid fa-school"></i>
+
+                    </div>
+
+                    <h3 class="text-2xl
+                               md:text-3xl
+                               font-black text-brandGold mt-6">
+
+                        مدرسة وروضة ماري
+
+                    </h3>
+
+                    <p class="text-slate-200
+                              max-w-xl mt-4
+                              leading-8">
+
+                        يسعدنا استقبالكم والإجابة عن استفساراتكم
+                        حول البرامج المتاحة والتسجيل.
+
+                    </p>
+
+                    <a href="https://www.google.com/maps/search/?api=1&query=32.6170966,5.5151436"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="inline-flex
+                              mt-6
+                              bg-white text-slate-900
+                              px-6 py-3
+                              rounded-xl
+                              font-bold text-sm">
+
+                        تحديد الاتجاهات
+                        <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+
+<section id="faq"
+         class="py-20 px-4
+                bg-slate-50 dark:bg-slate-900">
+
+    <div class="max-w-4xl mx-auto">
+
+        <div class="text-center mb-10 reveal">
+
+            <span class="text-brandGreen
+                         dark:text-emerald-400
+                         font-bold text-sm">
+
+                تحتاج إلى توضيح؟
+
+            </span>
+
+            <h2 class="text-3xl md:text-4xl
+                       font-black mt-3 text-dark">
+
+                الأسئلة الشائعة
+
+            </h2>
+
+        </div>
+
+
+        <div class="space-y-3">
+
+
+            <div class="faq-item
+                        bg-white dark:bg-slate-950
+                        border border-slate-200
+                        dark:border-slate-800
+                        rounded-2xl overflow-hidden">
+
+                <button type="button"
+                        class="faq-btn w-full
+                               p-5
+                               flex items-center
+                               justify-between gap-4
+                               text-right font-bold">
+
+                    <span>
+                        كيف يتم التسجيل الأولي؟
+                    </span>
+
+                    <i class="faq-icon fa-solid
+                             fa-chevron-down
+                             transition-transform
+                             text-slate-400"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <div class="px-5 pb-5
+                                text-sm text-muted
+                                leading-7">
+
+                        قم بتعبئة استمارة التسجيل،
+                        ثم سيتم فتح WhatsApp برسالة
+                        منظمة لإرسال الطلب إلى الإدارة.
+                        بعد ذلك يتم التواصل معكم لتأكيد التفاصيل.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item
+                        bg-white dark:bg-slate-950
+                        border border-slate-200
+                        dark:border-slate-800
+                        rounded-2xl overflow-hidden">
+
+                <button type="button"
+                        class="faq-btn w-full
+                               p-5
+                               flex items-center
+                               justify-between gap-4
+                               text-right font-bold">
+
+                    <span>
+                        هل التسجيل الإلكتروني نهائي؟
+                    </span>
+
+                    <i class="faq-icon fa-solid
+                             fa-chevron-down
+                             transition-transform
+                             text-slate-400"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <div class="px-5 pb-5
+                                text-sm text-muted
+                                leading-7">
+
+                        لا. التسجيل عبر الموقع هو طلب تسجيل أولي.
+                        القبول النهائي وتأكيد المقعد يتمان
+                        بعد التواصل مع الإدارة.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item
+                        bg-white dark:bg-slate-950
+                        border border-slate-200
+                        dark:border-slate-800
+                        rounded-2xl overflow-hidden">
+
+                <button type="button"
+                        class="faq-btn w-full
+                               p-5
+                               flex items-center
+                               justify-between gap-4
+                               text-right font-bold">
+
+                    <span>
+                        كيف أعرف المواد المتاحة حاليًا؟
+                    </span>
+
+                    <i class="faq-icon fa-solid
+                             fa-chevron-down
+                             transition-transform
+                             text-slate-400"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <div class="px-5 pb-5
+                                text-sm text-muted
+                                leading-7">
+
+                        يمكنك الاطلاع على قسم الأطوار والمواد
+                        في الموقع أو التواصل مباشرة مع الإدارة
+                        للتأكد من البرنامج والمواعيد الحالية.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item
+                        bg-white dark:bg-slate-950
+                        border border-slate-200
+                        dark:border-slate-800
+                        rounded-2xl overflow-hidden">
+
+                <button type="button"
+                        class="faq-btn w-full
+                               p-5
+                               flex items-center
+                               justify-between gap-4
+                               text-right font-bold">
+
+                    <span>
+                        كيف أتواصل مع قسم النساء أو الرجال؟
+                    </span>
+
+                    <i class="faq-icon fa-solid
+                             fa-chevron-down
+                             transition-transform
+                             text-slate-400"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <div class="px-5 pb-5
+                                text-sm text-muted
+                                leading-7">
+
+                        قسم النساء:
+                        <a href="tel:+213699854192"
+                           dir="ltr"
+                           class="text-pink-600 font-bold">
+
+                            0699 85 41 92
+
+                        </a>
+
+                        <br>
+
+                        قسم الرجال / WhatsApp:
+                        <a href="tel:+213673347137"
+                           dir="ltr"
+                           class="text-emerald-600 font-bold">
+
+                            0673 34 71 37
+
+                        </a>
+
+                        <br>
+
+                        الرقم العام:
+                        <a href="tel:+213699181993"
+                           dir="ltr"
+                           class="text-brandGreen font-bold">
+
+                            0699 18 19 93
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<section id="contact"
+         class="py-20 px-4 bg-white
+                dark:bg-slate-950">
+
+    <div class="max-w-7xl mx-auto">
+
+        <div class="text-center mb-12 reveal">
+
+            <span class="text-brandGreen
+                         dark:text-emerald-400
+                         font-bold text-sm">
+
+                نحن في خدمتكم
+
+            </span>
+
+            <h2 class="text-3xl md:text-4xl
+                       font-black mt-3 text-dark">
+
+                تواصل معنا
+
+            </h2>
+
+            <p class="text-muted mt-3">
+                اختر وسيلة التواصل المناسبة لك.
+            </p>
+
+        </div>
+
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+
+            <a href="tel:+213699181993"
+               class="contact-card">
+
+                <div class="contact-icon
+                            bg-emerald-100
+                            text-brandGreen">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                </div>
+
+                <h3 class="font-black text-dark">
+                    الرقم العام
+                </h3>
+
+                <p dir="ltr"
+                   class="text-sm font-bold
+                          text-muted mt-2">
+
+                    0699 18 19 93
+
+                </p>
+
+                <span class="contact-link">
+                    اتصال مباشر ←
+                </span>
+
+            </a>
+
+
+            <a href="tel:+213699854192"
+               class="contact-card">
+
+                <div class="contact-icon
+                            bg-pink-100 text-pink-700">
+
+                    <i class="fa-solid fa-person-dress"></i>
+
+                </div>
+
+                <h3 class="font-black text-dark">
+                    قسم النساء
+                </h3>
+
+                <p dir="ltr"
+                   class="text-sm font-bold
+                          text-muted mt-2">
+
+                    0699 85 41 92
+
+                </p>
+
+                <span class="text-pink-600
+                             text-xs font-bold mt-4">
+
+                    اتصال بالنساء ←
+
+                </span>
+
+            </a>
+
+
+            <a href="https://wa.me/213673347137"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="contact-card">
+
+                <div class="contact-icon
+                            bg-emerald-100
+                            text-emerald-700">
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                </div>
+
+                <h3 class="font-black text-dark">
+                    WhatsApp
+                </h3>
+
+                <p dir="ltr"
+                   class="text-sm font-bold
+                          text-muted mt-2">
+
+                    0673 34 71 37
+
+                </p>
+
+                <span class="text-emerald-600
+                             text-xs font-bold mt-4">
+
+                    بدء المحادثة ←
+
+                </span>
+
+            </a>
+
+
+            <a href="mailto:maryedschool@gmail.com"
+               class="contact-card">
+
+                <div class="contact-icon
+                            bg-blue-100 text-blue-700">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                </div>
+
+                <h3 class="font-black text-dark">
+                    البريد الإلكتروني
+                </h3>
+
+                <p class="text-xs font-bold
+                          text-muted mt-2 break-all">
+
+                    maryedschool@gmail.com
+
+                </p>
+
+                <span class="text-blue-600
+                             text-xs font-bold mt-4">
+
+                    إرسال بريد ←
+
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="bg-slate-950 text-slate-400">
+
+    <div class="max-w-7xl mx-auto px-4 py-12">
+
+        <div class="grid md:grid-cols-3 gap-10">
+
+            <div>
+
+                <div class="flex items-center gap-3">
+
+                    <div class="w-11 h-11
+                                bg-brandGold
+                                text-slate-950
+                                rounded-xl
+                                flex items-center justify-center
+                                font-black text-xl">
+
+                        M
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-white
+                                   font-black text-lg">
+
+                            مدرسة وروضة ماري
+
+                        </h3>
+
+                        <p class="text-xs">
+                            MARY SCHOOL
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <p class="text-sm leading-7 mt-5">
+                    بيئة تعليمية متكاملة تهتم بالتأسيس
+                    والمتابعة والدعم والطفولة المبكرة.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3 class="text-white font-black">
+                    روابط سريعة
+                </h3>
+
+                <div class="grid grid-cols-2 gap-3 mt-5 text-sm">
+
+                    <a href="#home" class="footer-link">الرئيسية</a>
+                    <a href="#nursery" class="footer-link">الروضة</a>
+                    <a href="#levels" class="footer-link">الأطوار</a>
+                    <a href="#courses" class="footer-link">الدورات</a>
+                    <a href="#register" class="footer-link">التسجيل</a>
+                    <a href="#location" class="footer-link">الموقع</a>
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <h3 class="text-white font-black">
+                    معلومات التواصل
+                </h3>
+
+                <div class="space-y-3 mt-5 text-sm">
+
+                    <p>
+                        <i class="fa-solid fa-location-dot
+                                 text-brandGold ml-2"></i>
+
+                        حي بن الزين، الحجيرة، توقرت
+                    </p>
+
+                    <p dir="ltr"
+                       class="text-right">
+
+                        <i class="fa-solid fa-phone
+                                 text-brandGold ml-2"></i>
+
+                        0699 18 19 93
+
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-envelope
+                                 text-brandGold ml-2"></i>
+
+                        maryedschool@gmail.com
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="border-t
+                    border-slate-800
+                    mt-10 pt-6
+                    flex flex-col md:flex-row
+                    justify-between
+                    items-center gap-3
+                    text-xs">
+
+            <p>
+                جميع الحقوق محفوظة © 2026 مدرسة ماري
+            </p>
+
+            <p>
+                الحجيرة - ولاية توقرت - الجزائر
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     FLOATING WHATSAPP
+========================================================= -->
+
+<div class="fixed bottom-5 left-5 z-40">
+
+    <button id="whatsappFloat"
+            type="button"
+            aria-label="التواصل عبر WhatsApp"
+            class="whatsapp-float
+                   w-14 h-14
+                   rounded-full
+                   bg-emerald-500
+                   hover:bg-emerald-600
+                   text-white
+                   flex items-center justify-center
+                   text-2xl shadow-xl">
+
+        <i class="fa-brands fa-whatsapp"></i>
+
+    </button>
+
+</div>
+
+
+<!-- =========================================================
+     BACK TO TOP
+========================================================= -->
+
+<button id="backTop"
+        type="button"
+        aria-label="العودة إلى الأعلى"
+        class="fixed bottom-5 right-5 z-40
+               w-11 h-11
+               rounded-full
+               bg-brandGreen text-white
+               shadow-lg
+               opacity-0 invisible
+               transition">
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+
+<!-- =========================================================
+     REGISTRATION MODAL
+========================================================= -->
+
+<div id="registrationModal"
+     class="modal fixed inset-0 z-[100]
+            bg-black/60 backdrop-blur-sm
+            p-4 flex items-center justify-center">
+
+    <div class="modal-panel
+                bg-white dark:bg-slate-900
+                w-full max-w-lg
+                max-h-[90vh]
+                overflow-y-auto
+                rounded-[2rem]
+                shadow-2xl">
+
+        <div class="p-6
+                    border-b border-slate-200
+                    dark:border-slate-800
+                    flex items-center justify-between">
+
+            <div>
+
+                <span class="text-xs
+                             text-brandGreen
+                             dark:text-emerald-400
+                             font-bold">
+
+                    تسجيل أولي
+
+                </span>
+
+                <h2 class="text-xl
+                           font-black mt-1 text-dark">
+
+                    طلب التسجيل
+
+                </h2>
+
+            </div>
+
+            <button onclick="closeRegistrationModal()"
+                    type="button"
+                    class="w-10 h-10
+                           rounded-xl
+                           bg-slate-100
+                           dark:bg-slate-800
+                           text-slate-500">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <div class="p-6">
+
+            <form id="modalForm"
+                  class="space-y-4">
+
+                <input name="guardianName"
+                       required
+                       type="text"
+                       placeholder="اسم ولقب الولي"
+                       class="form-input">
+
+                <input name="studentName"
+                       required
+                       type="text"
+                       placeholder="اسم ولقب التلميذ"
+                       class="form-input">
+
+
+                <select name="level"
+                        id="modalLevel"
+                        required
+                        class="form-input">
+
+                    <option value="">
+                        اختر الطور...
+                    </option>
+
+                    <option>
+                        روضة وحضانة عدنان ولينا
+                    </option>
+
+                    <option>
+                        الطور الابتدائي
+                    </option>
+
+                    <option>
+                        الطور المتوسط
+                    </option>
+
+                    <option>
+                        الطور الثانوي والتحضير للبكالوريا
+                    </option>
+
+                    <option>
+                        دورات تكوينية ودعم مكثف
+                    </option>
+
+                </select>
+
+
+                <input name="phone"
+                       required
+                       type="tel"
+                       dir="ltr"
+                       placeholder="رقم الهاتف 06XXXXXXXX"
+                       class="form-input">
+
+
+                <select name="subject"
+                        class="form-input">
+
+                    <option value="">
+                        المادة المطلوبة
+                    </option>
+
+                    <option>اللغة العربية</option>
+                    <option>الرياضيات</option>
+                    <option>اللغة الفرنسية</option>
+                    <option>اللغة الإنجليزية</option>
+                    <option>الفيزياء</option>
+                    <option>علوم الطبيعة</option>
+                    <option>دروس دعم عامة</option>
+                    <option>الروضة والحضانة</option>
+
+                </select>
+
+
+                <textarea name="notes"
+                          rows="3"
+                          placeholder="ملاحظات إضافية..."
+                          class="form-input resize-none"></textarea>
+
+
+                <button type="submit"
+                        class="w-full
+                               bg-brandGreen
+                               hover:bg-brandLightGreen
+                               text-white
+                               rounded-xl py-3.5
+                               font-black">
+
+                    <i class="fa-brands fa-whatsapp ml-2"></i>
+                    إرسال عبر WhatsApp
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     WHATSAPP CHOOSER
+========================================================= -->
+
+<div id="whatsappChooser"
+     class="hidden fixed bottom-24 left-5 z-50
+            w-72 bg-white dark:bg-slate-900
+            border border-slate-200
+            dark:border-slate-700
+            rounded-3xl shadow-2xl p-4">
+
+    <div class="flex justify-between items-center mb-3">
+
+        <h3 class="font-black text-dark">
+            اختر جهة التواصل
+        </h3>
+
+        <button onclick="closeWhatsAppChooser()"
+                class="text-slate-400">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+
+    <a href="https://wa.me/213673347137"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="block p-3 rounded-xl
+              bg-emerald-50
+              dark:bg-emerald-950
+              mb-2">
+
+        <strong class="text-emerald-700
+                       dark:text-emerald-300">
+
+            <i class="fa-brands fa-whatsapp"></i>
+            قسم الرجال
+
+        </strong>
+
+        <span class="block text-xs
+                     text-slate-500 mt-1"
+              dir="ltr">
+
+            0673 34 71 37
+
+        </span>
+
+    </a>
+
+
+    <a href="tel:+213699854192"
+       class="block p-3 rounded-xl
+              bg-pink-50
+              dark:bg-pink-950">
+
+        <strong class="text-pink-700
+                       dark:text-pink-300">
+
+            <i class="fa-solid fa-phone"></i>
+            قسم النساء
+
+        </strong>
+
+        <span class="block text-xs
+                     text-slate-500 mt-1"
+              dir="ltr">
+
+            0699 85 41 92
+
+        </span>
+
+    </a>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div id="toast"
+     class="toast fixed bottom-5
+            left-1/2 -translate-x-1/2
+            z-[200]
+            bg-slate-900
+            text-white
+            px-5 py-3
+            rounded-2xl
+            shadow-2xl
+            text-sm
+            max-w-[90vw]">
+
+    <span id="toastIcon">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+    </span>
+
+    <span id="toastMessage" class="mr-2">
+        تم بنجاح
+    </span>
+
+</div>
+
+
+<!-- =========================================================
+     COMPONENT STYLES
+========================================================= -->
+
+<style>
+
+    .mobile-link {
+        display: block;
+        padding: .75rem 1rem;
+        border-radius: .75rem;
+        font-weight: 700;
+        color: #475569;
+    }
+
+    .dark .mobile-link {
+        color: #cbd5e1;
+    }
+
+    .mobile-link:hover {
+        background: #f1f5f9;
+        color: #1b4332;
+    }
+
+    .dark .mobile-link:hover {
+        background: #1e293b;
+        color: #6ee7b7;
+    }
+
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        padding: .4rem .65rem;
+        border-radius: 999px;
+        font-size: .7rem;
+        font-weight: 800;
+        white-space: nowrap;
+    }
+
+
+    .subject {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .5rem;
+        padding: .65rem .75rem;
+        border-radius: .75rem;
+        background: white;
+        border: 1px solid #e2e8f0;
+        font-size: .75rem;
+        font-weight: 700;
+    }
+
+    .dark .subject {
+        background: #0f172a;
+        border-color: #1e293b;
+        color: #e2e8f0;
+    }
+
+    .subject span {
+        font-size: .65rem;
+        font-weight: 700;
+    }
+
+    .subject.unavailable span {
+        color: #94a3b8;
+    }
+
+    .subject.waiting span {
+        color: #d97706;
+    }
+
+
+    .form-label {
+        display: block;
+        margin-bottom: .45rem;
+        font-size: .8rem;
+        font-weight: 800;
+        color: #334155;
+    }
+
+    .dark .form-label {
+        color: #e2e8f0;
+    }
+
+
+    .form-input {
+        width: 100%;
+        padding: .85rem 1rem;
+        border-radius: .9rem;
+        border: 1px solid #cbd5e1;
+        background: #f8fafc;
+        outline: none;
+        font-size: .875rem;
+        color: #1e293b;
+        transition: .2s;
+    }
+
+    .dark .form-input {
+        border-color: #334155;
+        background: #0f172a;
+        color: #f1f5f9;
+    }
+
+    .form-input:focus {
+        border-color: #2d6a4f;
+        box-shadow: 0 0 0 3px rgba(45,106,79,.12);
+    }
+
+
+    .gallery-placeholder {
+        min-height: 210px;
+        border-radius: 1.5rem;
+        background:
+            linear-gradient(
+                135deg,
+                rgba(27,67,50,.95),
+                rgba(45,106,79,.8)
+            );
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: .7rem;
+        font-weight: 800;
+        border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .gallery-placeholder i {
+        font-size: 2rem;
+        color: #d4af37;
+    }
+
+
+    .contact-card {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        text-align: center;
+        transition: .25s;
+    }
+
+    .dark .contact-card {
+        background: #0f172a;
+        border-color: #1e293b;
+    }
+
+    .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,.08);
+    }
+
+    .contact-icon {
+        width: 3rem;
+        height: 3rem;
+        margin: 0 auto 1rem;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+
+    .contact-link {
+        display: block;
+        margin-top: 1rem;
+        font-size: .75rem;
+        font-weight: 800;
+        color: #1b4332;
+    }
+
+    .dark .contact-link {
+        color: #6ee7b7;
+    }
+
+
+    .footer-link {
+        transition: .2s;
+    }
+
+    .footer-link:hover {
+        color: white;
+    }
+
+</style>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    /* =====================================================
+       THEME
+    ===================================================== */
+
+    const themeBtn = document.getElementById('themeBtn');
+    const themeIcon = document.getElementById('themeIcon');
+
+    function applyTheme(theme) {
+
+        if (theme === 'dark') {
+
+            document.documentElement.classList.add('dark');
+
+            themeIcon.className = 'fa-solid fa-sun';
+
+        } else {
+
+            document.documentElement.classList.remove('dark');
+
+            themeIcon.className = 'fa-solid fa-moon';
+
+        }
+
+    }
+
+
+    const savedTheme = localStorage.getItem('mary-school-theme');
+
+    if (savedTheme) {
+
+        applyTheme(savedTheme);
+
+    } else if (
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+
+        applyTheme('dark');
+
+    }
+
+
+    themeBtn.addEventListener('click', () => {
+
+        const dark =
+            document.documentElement.classList.contains('dark');
+
+        const nextTheme = dark ? 'light' : 'dark';
+
+        applyTheme(nextTheme);
+
+        localStorage.setItem(
+            'mary-school-theme',
+            nextTheme
+        );
+
+    });
+
+
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+
+        mobileMenu.classList.toggle('open');
+
+        const icon = menuBtn.querySelector('i');
+
+        icon.className =
+            mobileMenu.classList.contains('open')
+                ? 'fa-solid fa-xmark'
+                : 'fa-solid fa-bars';
+
+    });
+
+
+    document.querySelectorAll('.mobile-link')
+        .forEach(link => {
+
             link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+
+                mobileMenu.classList.remove('open');
+
+                menuBtn.querySelector('i').className =
+                    'fa-solid fa-bars';
+
             });
+
         });
 
-        // Toggle FAQ Accordion
-        function toggleFaq(id) {
-            const ans = document.getElementById(`faq-ans-${id}`);
-            const icon = document.getElementById(`faq-icon-${id}`);
-            ans.classList.toggle('hidden');
-            icon.classList.toggle('rotate-180');
+
+    /* =====================================================
+       REVEAL ON SCROLL
+    ===================================================== */
+
+    const revealObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add('show');
+
+                        revealObserver.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: .08
+            }
+        );
+
+
+    document.querySelectorAll('.reveal')
+        .forEach(el => revealObserver.observe(el));
+
+
+    /* =====================================================
+       SEARCH COURSES
+    ===================================================== */
+
+    const courseSearch =
+        document.getElementById('courseSearch');
+
+    const courseCards =
+        document.querySelectorAll('.course-card');
+
+    const noCourses =
+        document.getElementById('noCourses');
+
+
+    courseSearch.addEventListener('input', () => {
+
+        const query =
+            courseSearch.value
+                .trim()
+                .toLowerCase();
+
+        let visible = 0;
+
+        courseCards.forEach(card => {
+
+            const text =
+                card.dataset.search.toLowerCase();
+
+            const match =
+                !query || text.includes(query);
+
+            card.style.display =
+                match ? '' : 'none';
+
+            if (match) visible++;
+
+        });
+
+
+        noCourses.classList.toggle(
+            'hidden',
+            visible !== 0
+        );
+
+    });
+
+
+    /* =====================================================
+       FAQ
+    ===================================================== */
+
+    document.querySelectorAll('.faq-btn')
+        .forEach(button => {
+
+            button.addEventListener('click', () => {
+
+                const item =
+                    button.closest('.faq-item');
+
+                document.querySelectorAll('.faq-item')
+                    .forEach(other => {
+
+                        if (other !== item) {
+                            other.classList.remove('active');
+                        }
+
+                    });
+
+                item.classList.toggle('active');
+
+            });
+
+        });
+
+
+    /* =====================================================
+       MODAL
+    ===================================================== */
+
+    const registrationModal =
+        document.getElementById('registrationModal');
+
+    const modalLevel =
+        document.getElementById('modalLevel');
+
+
+    function openRegistrationModal(level = '') {
+
+        registrationModal.classList.add('active');
+
+        document.body.style.overflow = 'hidden';
+
+        if (level) {
+            modalLevel.value = level;
         }
 
-        // Handle Form Submit & WhatsApp Integration
-        function handleFormSubmit(event) {
+    }
+
+
+    function closeRegistrationModal() {
+
+        registrationModal.classList.remove('active');
+
+        document.body.style.overflow = '';
+
+    }
+
+
+    registrationModal.addEventListener(
+        'click',
+        event => {
+
+            if (event.target === registrationModal) {
+                closeRegistrationModal();
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        'keydown',
+        event => {
+
+            if (
+                event.key === 'Escape' &&
+                registrationModal.classList.contains('active')
+            ) {
+
+                closeRegistrationModal();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       PHONE VALIDATION
+    ===================================================== */
+
+    function isAlgerianPhone(phone) {
+
+        const clean =
+            phone.replace(/\s+/g, '');
+
+        return /^(0|\+213)(5|6|7)[0-9]{8}$/.test(clean);
+
+    }
+
+
+    /* =====================================================
+       WHATSAPP MESSAGE
+    ===================================================== */
+
+    function buildWhatsAppMessage(data) {
+
+        const notes =
+            data.notes?.trim()
+                ? data.notes.trim()
+                : 'لا توجد ملاحظات';
+
+        const subject =
+            data.subject?.trim()
+                ? data.subject.trim()
+                : 'لم يتم تحديد مادة';
+
+        return `
+✨ *طلب تسجيل أولي - مدرسة ماري* ✨
+
+👤 *اسم الولي:*
+${data.guardianName}
+
+👦 *اسم التلميذ:*
+${data.studentName}
+
+📚 *الطور:*
+${data.level}
+
+📖 *المادة المطلوبة:*
+${subject}
+
+📞 *هاتف الولي:*
+${data.phone}
+
+📝 *ملاحظات:*
+${notes}
+
+━━━━━━━━━━━━━━
+
+تم إرسال الطلب عبر الموقع الرسمي لمدرسة ماري.
+        `.trim();
+
+    }
+
+
+    function sendToWhatsApp(data) {
+
+        const message =
+            buildWhatsAppMessage(data);
+
+        const encoded =
+            encodeURIComponent(message);
+
+        const whatsappNumber =
+            '213673347137';
+
+        const url =
+            `https://wa.me/${whatsappNumber}?text=${encoded}`;
+
+        window.open(url, '_blank');
+
+    }
+
+
+    /* =====================================================
+       MAIN REGISTRATION FORM
+    ===================================================== */
+
+    const registrationForm =
+        document.getElementById('registrationForm');
+
+    registrationForm.addEventListener(
+        'submit',
+        event => {
+
             event.preventDefault();
-            
-            // جلب البيانات من النموذج
-            const inputs = event.target.querySelectorAll('input, select, textarea');
-            const guardianName = inputs[0].value;
-            const studentName = inputs[1].value;
-            const educationalLevel = inputs[2].value;
-            const phone = inputs[3].value;
-            const notes = inputs[4].value || 'لا توجد ملاحظات';
 
-            // رقم واتساب الإدارة المخصص (0673347137 مع رمز الجزائر +213)
-            const adminWhatsAppNumber = "213673347137"; 
+            const formData =
+                new FormData(registrationForm);
 
-            // صياغة رسالة التسجيل الأولي
-            const message = `✨ *طلب تسجيـل أولي جديـد - مدرسة ماري* ✨\n\n` +
-                            `👤 *اسم الولي:* ${guardianName}\n` +
-                            `👦 *اسم التلميذ:* ${studentName}\n` +
-                            `📚 *الطور التعليمي:* ${educationalLevel}\n` +
-                            `📞 *رقم الهاتف:* ${phone}\n` +
-                            `📝 *ملاحظات:* ${notes}\n\n` +
-                            `--- \n` +
-                            `تم إرسال هذا الطلب عبر موقع مدرسة ماري (Mary School).`;
+            const data =
+                Object.fromEntries(formData.entries());
 
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappURL = `https://wa.me/${adminWhatsAppNumber}?text=${encodedMessage}`;
-            
-            // فتح رابط الواتساب لتوصيل الرسالة للإدارة فوراً
-            window.open(whatsappURL, '_blank');
 
-            // إعادة ضبط النموذج وإظهار رسالة النجاح
-            const form = document.getElementById('pre-reg-form');
-            const successMsg = document.getElementById('form-success');
-            
-            form.reset();
-            successMsg.classList.remove('hidden');
-            
-            setTimeout(() => {
-                successMsg.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
+            if (!isAlgerianPhone(data.phone)) {
+
+                showToast(
+                    'يرجى إدخال رقم هاتف جزائري صحيح.',
+                    'error'
+                );
+
+                return;
+
+            }
+
+
+            sendToWhatsApp(data);
+
+            registrationForm.reset();
+
+            showToast(
+                'تم تجهيز طلب التسجيل وفتح WhatsApp.',
+                'success'
+            );
+
         }
-    </script>
+    );
+
+
+    /* =====================================================
+       MODAL FORM
+    ===================================================== */
+
+    const modalForm =
+        document.getElementById('modalForm');
+
+    modalForm.addEventListener(
+        'submit',
+        event => {
+
+            event.preventDefault();
+
+            const formData =
+                new FormData(modalForm);
+
+            const data =
+                Object.fromEntries(formData.entries());
+
+
+            if (!isAlgerianPhone(data.phone)) {
+
+                showToast(
+                    'رقم الهاتف غير صحيح.',
+                    'error'
+                );
+
+                return;
+
+            }
+
+
+            sendToWhatsApp(data);
+
+            modalForm.reset();
+
+            closeRegistrationModal();
+
+            showToast(
+                'تم تجهيز طلب التسجيل وفتح WhatsApp.',
+                'success'
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    const toast =
+        document.getElementById('toast');
+
+    const toastMessage =
+        document.getElementById('toastMessage');
+
+    const toastIcon =
+        document.getElementById('toastIcon');
+
+    let toastTimer;
+
+
+    function showToast(message, type = 'success') {
+
+        clearTimeout(toastTimer);
+
+        toastMessage.textContent = message;
+
+        if (type === 'error') {
+
+            toastIcon.innerHTML =
+                '<i class="fa-solid fa-circle-exclamation text-red-400"></i>';
+
+        } else {
+
+            toastIcon.innerHTML =
+                '<i class="fa-solid fa-circle-check text-emerald-400"></i>';
+
+        }
+
+        toast.classList.add('show');
+
+        toastTimer =
+            setTimeout(() => {
+
+                toast.classList.remove('show');
+
+            }, 4000);
+
+    }
+
+
+    /* =====================================================
+       WHATSAPP FLOAT
+    ===================================================== */
+
+    const whatsappFloat =
+        document.getElementById('whatsappFloat');
+
+    const whatsappChooser =
+        document.getElementById('whatsappChooser');
+
+
+    whatsappFloat.addEventListener(
+        'click',
+        () => {
+
+            whatsappChooser.classList.toggle('hidden');
+
+        }
+    );
+
+
+    function closeWhatsAppChooser() {
+
+        whatsappChooser.classList.add('hidden');
+
+    }
+
+
+    /* =====================================================
+       BACK TO TOP
+    ===================================================== */
+
+    const backTop =
+        document.getElementById('backTop');
+
+
+    window.addEventListener(
+        'scroll',
+        () => {
+
+            if (window.scrollY > 600) {
+
+                backTop.classList.remove(
+                    'opacity-0',
+                    'invisible'
+                );
+
+                backTop.classList.add(
+                    'opacity-100',
+                    'visible'
+                );
+
+            } else {
+
+                backTop.classList.add(
+                    'opacity-0',
+                    'invisible'
+                );
+
+                backTop.classList.remove(
+                    'opacity-100',
+                    'visible'
+                );
+
+            }
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    backTop.addEventListener(
+        'click',
+        () => {
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+
+        }
+    );
+
+
+    /* =====================================================
+       CLOSE WHATSAPP MENU WHEN CLICKING OUTSIDE
+    ===================================================== */
+
+    document.addEventListener(
+        'click',
+        event => {
+
+            if (
+                !whatsappChooser.contains(event.target) &&
+                !whatsappFloat.contains(event.target)
+            ) {
+
+                closeWhatsAppChooser();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       DYNAMIC YEAR
+    ===================================================== */
+
+    const currentYear =
+        new Date().getFullYear();
+
+    document
+        .querySelectorAll('footer')
+        .forEach(footer => {
+
+            footer.innerHTML =
+                footer.innerHTML.replace(
+                    '2026 مدرسة ماري',
+                    `${currentYear} مدرسة ماري`
+                );
+
+        });
+
+
+    /* =====================================================
+       PREVENT EMPTY SEARCH FORM BEHAVIOR
+    ===================================================== */
+
+    document.querySelectorAll(
+        'input[type="search"]'
+    ).forEach(input => {
+
+        input.addEventListener(
+            'keydown',
+            event => {
+
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                }
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       CLOSE MOBILE MENU WITH ESC
+    ===================================================== */
+
+    document.addEventListener(
+        'keydown',
+        event => {
+
+            if (
+                event.key === 'Escape' &&
+                mobileMenu.classList.contains('open')
+            ) {
+
+                mobileMenu.classList.remove('open');
+
+                menuBtn.querySelector('i').className =
+                    'fa-solid fa-bars';
+
+            }
+
+        }
+    );
+
+</script>
+
 </body>
 </html>
+```
